@@ -69,7 +69,7 @@ data1$mpg
 
 ### Univariate Statistics
 
-There are various ways to call a number of univariate statistics in R. As social scientists, the main univariate statistics we are concerned with are the Mean, Median, Standard Deviation, Minimum, Maximum, and Range. The stock R program comes with the `summary` function. 
+There are various ways to call a number of univariate statistics in R. As social scientists, the main univariate statistics we are concerned with are the mean, median, standard deviation, minimum, maximum, and range. The stock R program comes with the <span style="color:blue">`summary`</span> function. 
 
 ```{r}
 summary(data1)
@@ -81,14 +81,14 @@ This calls univariate statistics for all variables in the data set, but you can 
 summary(data1$mpg)
 ```
 
-However, the stock function does not provide the measures for Standard Deviation or Range. Therefore, we can use the `describe` function from the `psych` package. Again, we can call the statistics for both the full data set and a specific variable.
+However, the stock function does not provide the measures for Standard Deviation or Range. Therefore, we can use the <span style="color:blue">`describe`</span> function from the <span style="color:blue">`psych`</span> package. Again, we can call the statistics for both the full data set and a specific variable.
 
 ```{r}
 describe(data1)
 describe(data1$mpg)
 ```
 
-In addition, you can call desired univariate statistics. Here, we'll run the statistics on the `mpg` variable.
+In addition, you can call desired univariate statistics. Here, we'll run the statistics on the <span style="color:blue">`mpg`</span> variable.
 
 ```{r}
 mean(data1$mpg)
@@ -99,7 +99,7 @@ max(data1$mpg)
 range(data1$mpg)
 ```
 
-However, you'll notice there's a range problem. To fix this, we can incorporate our assignment operator `<-` to create new variables in working memory. An appropriate range value is the difference between the maximum and minimum values. Using this knowledge, we can solve the problem ourselves.
+However, you'll notice there's a range problem. To fix this, we can incorporate our assignment operator <span style="color:blue">`<-`</span> to create new variables in working memory. An appropriate range value is the difference between the maximum and minimum values. Using this knowledge, we can solve the problem ourselves.
 
 ```{r}
 min1<-min(data1$mpg)
