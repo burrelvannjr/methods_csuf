@@ -57,6 +57,8 @@ Before running analyses, you have to set your working directory. This is the fol
 setwd("/Users/burrelvannjr/Desktop")
 ```
 
+# 
+
 This will be different for you. To set your working directory, use <span style="color:blue">`setwd("directory")`</span>, using the location of your folder in place of the word "directory".
 
 
@@ -68,12 +70,16 @@ Because R is and open-source statistical program, many of its functions are buil
 options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
 ```
 
+# 
+
 Install the packages from the repository
 
 ```{r, results="hide"}
 install.packages("MASS")
 install.packages("psych")
 ```
+
+# 
 
 Load the packages as libraries
 
@@ -92,11 +98,15 @@ The <span style="color:blue">`MASS`</span> package comes with a great data set o
 mtcars
 ```
 
+# 
+
 While this is great, and the dataset is loaded into your console window, you will need a local copy to run operations on. The great thing about R is that it uses Object-Oriented Programming, meaning that you can assign a name to an object (like a data set), which will create a working copy in your computer's memory for you to run operations on. To do so, you simply must assign a name using a *left arrow* (the assignment operator) like this: <span style="color:blue">`new_object <- dataset`</span>. So to work with the <span style="color:blue">`mtcars`</span> data, you should call it something new, like this:
 
 ```{r}
 data1<-mtcars
 ```
+
+# 
 
 Like above, you can now call <span style="color:blue">`data1`</span>, and it will load the same data set into your console window. In addition, in RStudio, after you give the data a new name (converting it to a usable object), you can view the data in your upper-right **Environment** window.
 
@@ -116,11 +126,15 @@ There are various ways to call a number of univariate statistics in R. As social
 summary(data1)
 ```
 
+# 
+
 This calls univariate statistics for all variables in the data set, but you can also call these same univariate statistics for individual variables, like:
 
 ```{r}
 summary(data1$mpg)
 ```
+
+# 
 
 However, the stock function does not provide the measures for Standard Deviation or Range. Therefore, we can use the <span style="color:blue">`describe`</span> function from the <span style="color:blue">`psych`</span> package. Again, we can call the statistics for both the full data set and a specific variable.
 
@@ -128,6 +142,8 @@ However, the stock function does not provide the measures for Standard Deviation
 describe(data1)
 describe(data1$mpg)
 ```
+
+# 
 
 In addition, you can call desired univariate statistics. Here, we'll run the statistics on the <span style="color:blue">`mpg`</span> variable.
 
@@ -140,13 +156,17 @@ max(data1$mpg)
 range(data1$mpg)
 ```
 
-However, you'll notice there's a range problem. To fix this, we can incorporate our assignment operator <span style="color:blue">`<-`</span> to create new variables in working memory. An appropriate range value is the difference between the maximum and minimum values. Using this knowledge, we can solve the problem ourselves.
+# 
+
+You'll notice there's a range problem. To fix this, we can incorporate our assignment operator <span style="color:blue">`<-`</span> to create new variables in working memory. An appropriate range value is the difference between the maximum and minimum values. Using this knowledge, we can solve the problem ourselves.
 
 ```{r}
 min1<-min(data1$mpg)
 max1<-max(data1$mpg)
 max1-min1
 ```
+
+# 
 
 or another way...
 
@@ -155,11 +175,15 @@ range1<-max1-min1
 range1
 ```
 
+# 
+
 or another way, without renaming anything
 
 ```{r}
 max(data1$mpg)-min(data1$mpg)
 ```
+
+# 
 
 In addition, you can create a visual representation (plot) of the univariate data using a histogram. Use the <span style="color:blue">`hist`</span> function to plot a histogram.
 
@@ -167,7 +191,6 @@ In addition, you can create a visual representation (plot) of the univariate dat
 hist(data1$mpg)
 ```
 
-<br><br><br>
 
 ### Working with Random, Normally-Distributed Data
 
@@ -180,23 +203,39 @@ rnorm(100,0,1)
 rnorm(100)
 ```
 
+# 
+
 Obviously, you can alter the number of cases involved.
+
+# 
+
 
 ```{r}
 rnorm(10)
 ```
 
+# 
+
 or...
+
+# 
 
 ```{r}
 rnorm(100)
 ```
 
-or even... (output supressed)
+# 
+
+or even...
+
+# 
 
 ```{r, results="hide"}
 rnorm(1000)
 ```
+(output supressed)
+
+# 
 
 You can also use the assignment operator <span style="color:blue">`<-`</span> to assign the values of the <span style="color:blue">`rnorm`</span> function to an object:
 
@@ -206,7 +245,11 @@ hundred<-rnorm(100)
 thousand<-rnorm(1000)
 ```
 
+# 
+
 Then you can run univariate statistics on those data, and even create a histogram for the data:
+
+# 
 
 ```{r}
 mean(thousand)
@@ -219,6 +262,9 @@ range
 hist(thousand)
 ```
 
+# 
+# 
+
 Finally, you can see how histograms differ when all you do is alter the number of cases:
 
 ```{r}
@@ -227,4 +273,4 @@ hist(hundred)
 hist(thousand)
 ```
 
-So no you know that the more cases/data points you have, the more your data will mimic the normal distribution (bell curve).
+So now you know that the more cases/data points you have, the more your data will mimic the normal distribution (bell curve).
