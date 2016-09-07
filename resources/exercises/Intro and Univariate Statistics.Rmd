@@ -10,43 +10,43 @@ output:
 
 We will be using [R](http://cran.stat.ucla.edu/), an open-source statistical program. Open-source, of course, means that it is free to use. R is a programming language, and the basic R program runs through command-line. To make it easy on first-time users, we will also be  using R's graphical user interface, [RStudio](https://www.rstudio.com/products/rstudio/download2/), that runs R in one of its windows -- without you having to open R. 
 
-### Getting Started with R
+### Downloading R
 
-Go to the [R website](http://cran.stat.ucla.edu/) to download the program. Under the "Download and Install R" section, select the distribution that matches your computer's operating system (macOS/OSX, Windows, Linux). 
+1. Go to the [R website](http://cran.stat.ucla.edu/) to download the program. Under the "Download and Install R" section, select the distribution that matches your computer's operating system (macOS/OSX, Windows, Linux). 
 
-For Mac Users: On the next page, under the "Files" section, select the first file/link (which should be something like "R-3.3.1.pkg")
+    + For Mac Users: On the next page, under the "Files" section, select the first file/link (which should be something like "R-3.3.1.pkg")
 
-For Windows Users: On the next page, select the link/word "base". On the following page, select the large link (which should be something like "Download R 3.3.1 for Windows")
+    + For Windows Users: On the next page, select the link/word "base". On the following page, select the large link (which should be something like "Download R 3.3.1 for Windows")
 
-For Linux Users: On the next page, select your specific distribution, and follow the instructions.
+    + For Linux Users: On the next page, select your specific distribution, and follow the instructions.
 
-For all users, install the downloaded file.
+2. For all users, install the downloaded R program.
 
-Next, we will download [RStudio](https://www.rstudio.com/products/rstudio/download2/) which is a easily understandable user interface for using R. Under "Installers for Supported Platforms" select the RStudio installer that matches your operating system.
+3. Next, we will download [RStudio](https://www.rstudio.com/products/rstudio/download2/) which is a easily understandable user interface for using R. Under "Installers for Supported Platforms" select the RStudio installer that matches your operating system.
 
-After the download is complete, install the program.
+4. After the download is complete, install the RStudio program.
 
 ### Getting Started with R
 
 Open the RStudio program, which should be linked to R.
 
-![R Studio Window](rstudio.png)
+![R Studio Window](rstudio.png) <br><br><br>
 
 There are various windows within RStudio, including the Script window, where all your codes are viewable:
 
-![Script Window](script.png)
+![Script Window](script.png) <br><br><br>
 
 The R console window where you paste and run your code:
 
-![R Console Window](R console.png)
+![R Console Window](R console.png) <br><br><br>
 
 The Environment window, where your data and background processes are viewable:
 
-![Environment Window](environment.png)
+![Environment Window](environment.png) <br><br><br>
 
 And the Plot/Viewer window, where your output figures/diagrams, help information, and file viewer are located:
 
-![Viewer Window](plot_package_viewer.png)
+![Viewer Window](plot_package_viewer.png) <br><br>
 
 
 ### Getting Familiar with R
@@ -110,7 +110,7 @@ data1$mpg
 
 ### Univariate Statistics
 
-There are various ways to call a number of univariate statistics in R. As social scientists, the main univariate statistics we are concerned with are the mean, median, standard deviation, minimum, maximum, and range. The stock R program comes with the <span style="color:blue">`summary`</span> function. 
+There are various ways to call a number of univariate statistics in R. As social scientists, the main univariate statistics we are concerned with are the mean, median, standard deviation, minimum, maximum, and range. The stock R program comes with the <span style="color:blue">summary</span> function. 
 
 ```{r}
 summary(data1)
@@ -160,3 +160,71 @@ or another way, without renaming anything
 ```{r}
 max(data1$mpg)-min(data1$mpg)
 ```
+
+In addition, you can create a visual representation (plot) of the univariate data using a histogram. Use the <span style="color:blue">`hist`</span> function to plot a histogram.
+
+```{r}
+hist(data1$mpg)
+```
+
+<br><br><br>
+
+### Working with Random, Normally-Distributed Data
+
+R also has a number of functions that work to create random data. To create random, normally-distributed data, use the <span style="color:blue">`rnorm`</span> function, which takes a maximum of three arguments. It should look something like this <span style="color:blue">`rnorm(100,0,1)`</span>, where the first number (here, <span style="color:blue">`100`</span>) represents the number of cases or data points you want in your random normally-distributed data. The second argument/number (here <span style="color:blue">`0`</span>) is the mean that you want your data to have. The third number/argument (here <span style="color:blue">`1`</span>) is the standard deviation that you want your data to have. 
+
+Note that the <span style="color:blue">`rnorm`</span> function takes a maximum of three arguments -- and it takes a minimum of one argument (the number of cases/data points). The default settings for the <span style="color:blue">`rnorm`</span> function is mean of 0 and a standard deviation of 1. This means that <span style="color:blue">`rnorm(100)`</span> and <span style="color:blue">`rnorm(100,0,1)`</span> will output similar means and standard deviations. Similar, not the exact same, because these data are *randomly* generated, so the values of the data points will vary a bunch but still have a mean of 0 and standard deviation of 1. 
+
+```{r, results="hide"}
+rnorm(100,0,1)
+rnorm(100)
+```
+
+Obviously, you can alter the number of cases involved.
+
+```{r}
+rnorm(10)
+```
+
+or...
+
+```{r}
+rnorm(100)
+```
+
+or even... (output supressed)
+
+```{r, results="hide"}
+rnorm(1000)
+```
+
+You can also use the assignment operator <span style="color:blue">`<-`</span> to assign the values of the <span style="color:blue">`rnorm`</span> function to an object:
+
+```{r}
+ten<-rnorm(10)
+hundred<-rnorm(100)
+thousand<-rnorm(1000)
+```
+
+Then you can run univariate statistics on those data, and even create a histogram for the data:
+
+```{r}
+mean(thousand)
+median(thousand)
+sd(thousand)
+min(thousand)
+max(thousand)
+range<-max(thousand)-min(thousand)
+range
+hist(thousand)
+```
+
+Finally, you can see how histograms differ when all you do is alter the number of cases:
+
+```{r}
+hist(ten)
+hist(hundred)
+hist(thousand)
+```
+
+So no you know that the more cases/data points you have, the more your data will mimic the normal distribution (bell curve).
