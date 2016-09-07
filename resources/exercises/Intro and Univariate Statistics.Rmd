@@ -1,16 +1,57 @@
 ---
-title: "Introduction to R and Statistics"
+title: "Introduction to R and Quantitative Methods"
 author: "Burrel Vann Jr"
 output: 
   html_document: 
     css: markdown3.css
 ---
 
+### What is R?
+
+We will be using [R](http://cran.stat.ucla.edu/), an open-source statistical program. Open-source, of course, means that it is free to use. R is a programming language, and the basic R program runs through command-line. To make it easy on first-time users, we will also be  using R's graphical user interface, [RStudio](https://www.rstudio.com/products/rstudio/download2/), that runs R in one of its windows -- without you having to open R. 
+
 ### Getting Started with R
 
-We will be downloading and using [R](http://cran.stat.ucla.edu/), an open-source statistical program. Open-source, of course, means that it is free to use. R is a programming language, and the basic R program runs through command-line. To make it easy on first-time users, we will also be downloading and using R's graphical user interface, [RStudio](https://www.rstudio.com/products/rstudio/download2/), that runs R in one of its windows -- without you having to open R. 
+Go to the [R website](http://cran.stat.ucla.edu/) to download the program. Under the "Download and Install R" section, select the distribution that matches your computer's operating system (macOS/OSX, Windows, Linux). 
 
-First, you have to set your working directory. This is the folder where your data/output is and will be saved. For example:
+For Mac Users: On the next page, under the "Files" section, select the first file/link (which should be something like "R-3.3.1.pkg")
+
+For Windows Users: On the next page, select the link/word "base". On the following page, select the large link (which should be something like "Download R 3.3.1 for Windows")
+
+For Linux Users: On the next page, select your specific distribution, and follow the instructions.
+
+For all users, install the downloaded file.
+
+Next, we will download [RStudio](https://www.rstudio.com/products/rstudio/download2/) which is a easily understandable user interface for using R. Under "Installers for Supported Platforms" select the RStudio installer that matches your operating system.
+
+After the download is complete, install the program.
+
+### Getting Started with R
+
+Open the RStudio program, which should be linked to R.
+
+![R Studio Window](rstudio.png)
+
+There are various windows within RStudio, including the Script window, where all your codes are viewable:
+
+![Script Window](script.png)
+
+The R console window where you paste and run your code:
+
+![R Console Window](R console.png)
+
+The Environment window, where your data and background processes are viewable:
+
+![Environment Window](environment.png)
+
+And the Plot/Viewer window, where your output figures/diagrams, help information, and file viewer are located:
+
+![Viewer Window](plot_package_viewer.png)
+
+
+### Getting Familiar with R
+
+Before running analyses, you have to set your working directory. This is the folder where your data/output is and will be saved. For example:
 
 ```{r}
 setwd("/Users/burrelvannjr/Desktop")
@@ -45,7 +86,7 @@ library(psych)
 
 ### Working with Data 
 
-The <span style="color:blue">`MASS`</span> package comes with a great data set on car manufacturers called <span style="color:blue">`mtcars`</span>. To use the <span style="color:blue">`mtcars`</span> data, you must call it. Calling the data will load it into your console window
+The <span style="color:blue">`MASS`</span> package comes with a great data set on car manufacturers called <span style="color:blue;background:none">`mtcars`</span>. To use the <span style="color:blue">`mtcars`</span> data, you must call it. Calling the data will load it into your console window
 
 ```{r}
 mtcars
