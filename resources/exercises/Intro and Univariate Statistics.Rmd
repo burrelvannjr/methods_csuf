@@ -120,7 +120,7 @@ data1$mpg
 
 ### Univariate Statistics
 
-There are various ways to call a number of univariate statistics in R. As social scientists, the main univariate statistics we are concerned with are the mean, median, standard deviation, minimum, maximum, and range. The stock R program comes with the <span style="color:blue">summary</span> function. 
+There are various ways to call a number of univariate statistics in R. As social scientists, the main univariate statistics we are concerned with are the mean, median, standard deviation, minimum, maximum, and range. The stock R program comes with the <span style="color:blue">`summary`</span> function. 
 
 ```{r}
 summary(data1)
@@ -274,3 +274,9 @@ hist(thousand)
 ```
 
 So now you know that the more cases/data points you have, the more your data will mimic the normal distribution (bell curve).
+
+# 
+
+# 
+
+# 
