@@ -275,8 +275,4 @@ hist(thousand)
 
 So now you know that the more cases/data points you have, the more your data will mimic the normal distribution (bell curve).
 
-# 
-
-# 
-
-# 
+<br><br><br>
