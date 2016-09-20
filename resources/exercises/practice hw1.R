@@ -3,29 +3,25 @@ setwd("/Users/burrelvannjr/Dropbox/methods_csuf")
 
 #load those packages so you can work with them
 library(psych)
-#for editing labels
+#for editing variable labels
 library(Hmisc)
-#for reading in urls/csvs/data from urls
+#for reading in data from the web
 library(RCurl)
-library(foreign)
 
+#u
 #pull in the DATASET and make it a workable object (call it DATA or whatever you want)
 DATA1<-read.csv("resources/data/GSS2014_cleaned_nm.csv",header=TRUE,sep=",")
+#add variable labels to data set
+source("resources/data/label_code.R")
 
-url <- "https://raw.github.com/burrelvannjr/methods_csuf/master/resources/data/GSS2014_cleaned.csv"
 
-
-source("resources/data/variable labels code.R")
-
+#pull in the DATASET and make it a workable object (call it DATA or whatever you want)
+DATA1<-read.csv(text=getURL("https://raw.githubusercontent.com/burrelvannjr/methods_csuf/master/resources/data/GSS2014_cleaned_nm.csv"))
+#add variable labels to data set
+source("https://raw.githubusercontent.com/burrelvannjr/methods_csuf/master/resources/data/label_code.R")
 
 #adding a value label
 #DATA1$sex <- factor(DATA1$sex,levels = c(1,2),labels = c("male", "female"))
-
-#with Hmisc package, adds value label
-label(race) <- "Sex"
-
-#call the data
-DATA1
 
 #call a VARIABLE within the DATA
 DATA1$VARIABLE

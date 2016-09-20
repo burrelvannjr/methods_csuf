@@ -3,12 +3,19 @@ setwd("DIRECTORY")
 
 #load those packages so you can work with them
 library(psych)
+#for editing variable labels
+library(Hmisc)
+#for reading in data from the web
+library(RCurl)
 
-#pull in the DATASET and make it a workable object (call it DATA or whatever you want)
-DATA1<-read.csv("DATASET.csv",header=TRUE,sep=",")
+#pull in the DATASET from your working directory and make it a workable object (call it DATA or whatever you want)
+DATA1<-read.csv("DATASET.csv",header=TRUE,sep=",") #DATA1<-read.csv(text=getURL("LINK.csv"))
 
 #call the data
 DATA1
+
+#add variable labels to data set by running an R script
+source("LABELS.R") #source("LINK.R")
 
 #call a VARIABLE within the DATA
 DATA1$VARIABLE
