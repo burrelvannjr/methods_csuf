@@ -74,7 +74,7 @@ options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
 
 Install the packages from the repository
 
-```{r, results="hide"}
+```{r, results="hide", warning=FALSE}
 install.packages("MASS")
 install.packages("psych")
 install.packages("Hmisc")

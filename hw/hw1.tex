@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{authblk} %package for blocking authors, followed by blocking affiliation
+\usepackage{url}
+\usepackage{ulem} % when using ulem package, must change \emph to \it for italics.
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{amssymb,amsmath,tabu}
+\usepackage{hyperref}
+\setlength\parindent{0pt}
+\usepackage[english]{babel}
+
+
+\begin{document}
+\title{Homework 1}
+\author[*]{}
+\date{}
+\maketitle
+
+
+
+\section*{Overview:}
+In this assignment, you'll be using R/RStudio and the GSS data set (2014) to report univariate statistics for two dependent variables of interest. These variables must be different than the ones I present in the example below (unless you've discussed it with me).
+
+\subsection*{What you will need:}
+The following can be downloaded from our course website
+\begin{itemize}
+\item \textbf{hw1\_script.R}
+\item \textbf{GSS2014\_final.csv} aka GSS Data Set (2014)
+\item \textbf{LABELS\_script.R}
+\item \textbf{GSS Variables and Descriptions.pdf}
+\item \textbf{GSS\_Codebook.pdf}
+\end{itemize}
+
+
+\subsection*{Tasks:}
+\begin{itemize}
+\item Open up the Homework 1 script/code file (\textbf{hw1\_script.R}). This is the file you'll be working from.
+\item Set your working directory
+\item Load the required packages/libraries
+\item Download the data set (\textbf{GSS2014\_final.csv}) from under ``R Resources'' on our course website, save the data set on your computer, and pull in the data set by locating that file's directory. (Alternatively, you can pull in the data set using using URL method.)
+\item Download the cleaner/labels file (\textbf{LABELS\_script.R}) from under ``R Resources'' on our course website, save the labels file on your computer, and pull in the labels file by locating that file's directory. (Alternatively, you can pull in the labels file using using URL method.)
+\item Select two (2) interval/continuous dependent variables that interest you. To do so, you will need to look through the list of variables (\textbf{GSS Variables and Descriptions.pdf}). Once you've selected two variables, locate them in the codebook (\textbf{GSS\_Codebook.pdf}) to figure out how those variables are coded.
+\end{itemize}
+
+
+\subsection*{What you will turn in:}
+\begin{itemize}
+\item A brief paragraph describing:
+	\begin{itemize}
+	\item A sentence or two about the data set you're using for these variables.
+	\item For each variable, a sentence or two describing the variable name and its description.
+	\end{itemize}	
+\item A table with that lists the five univariate statistics for each variable (e.g. Mean, Standard Deviation, Median, Minimum, and Maximum)
+\item The text of your R code/script on a separate page.
+\end{itemize}
+
+\newpage
+\section*{\center Example Homework 1}
+
+\subsection*{1: Data Set Description}
+The data for this assignment come from the General Social Survey administered in 2014. The data set has 2,538 observations, with individuals as the unit of analysis. \newline
+
+\subsection*{2: Variable Descriptions}
+The two outcome variables I selected were \textbf{POLVIEWS} and \textbf{OPPSEGOV}. The variable \textbf{POLVIEWS} is a continuous measure of conservatism that ranges from 1 to 7, with higher scores on this variable indicating higher levels of conservatism. The text of the variable is as follows:
+\begin{quote}
+``We hear a lot of talk these days about liberals and conservatives. I'm going to show you a seven-point scale on which the political views that people might hold are arranged from extremely liberal--point 1--to extremely conservative-- point 7. Where would you place yourself on this scale?''
+\end{quote}
+
+The variable \textbf{OPPSEGOV} is a continuous measure on the importance of civil disobedience that ranges from 1 to 7, with higher scores indicating that the respondent believes civil disobedience is more important. The text of the variable is as follows:
+\begin{quote}
+``That citizens may engage in acts of civil disobedience when they oppose government actions.''\newline
+\end{quote}
+
+
+
+\subsection*{3: Univariate Statistics Table}
+\begin{center}
+\begin{tabular}{ >{$}c<{$}  >{$}c<{$}  >{$}c<{$} >{$}c<{$}  >{$}c<{$}  >{$}c<{$}}
+  Variable & Mean & SD & Median & Minimum & Maximum \\
+  \hline
+  POLVIEWS & 4.089016 & 1.43409 & 4 & 1 & 7 \\
+  OPPSEGOV & 4.250441 & 2.087003 & 4 & 1 & 7 \\
+  \hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsection*{4: R Code/Script for Homework 1}
+\begin{verbatim}
+setwd("/Users/burrelvannjr/Dropbox/methods_csuf")
+
+library(psych)
+library(Hmisc)
+library(RCurl)
+
+DATA1<-read.csv("resources/data/GSS2014_cleaned_nm.csv",header=TRUE,sep=",")
+source("resources/data/LABELS_script.R")
+
+DATA1$polviews
+DATA1$oppsegov
+
+mean(DATA1$polviews, na.rm=TRUE)
+sd(DATA1$polviews, na.rm=TRUE)
+min(DATA1$polviews, na.rm=TRUE)
+max(DATA1$polviews, na.rm=TRUE)
+median(DATA1$polviews, na.rm=TRUE)
+
+mean(DATA1$oppsegov, na.rm=TRUE)
+sd(DATA1$oppsegov, na.rm=TRUE)
+median(DATA1$oppsegov, na.rm=TRUE)
+min(DATA1$oppsegov, na.rm=TRUE)
+max(DATA1$oppsegov, na.rm=TRUE)
+
+\end{verbatim}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+

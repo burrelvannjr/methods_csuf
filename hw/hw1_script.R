@@ -11,6 +11,7 @@ library(RCurl)
 #pull in the DATASET from your working directory and make it a workable object (call it DATA or whatever you want)
 DATA1<-read.csv("DATASET.csv",header=TRUE,sep=",") 
 #DATA1<-read.csv(text=getURL("LINK.csv"))
+#DATA1<-read.csv(text=getURL("https://raw.githubusercontent.com/burrelvannjr/methods_csuf/master/resources/data/GSS2014_final.csv"))
 
 #call the data
 DATA1
@@ -18,6 +19,7 @@ DATA1
 #add variable labels to data set by running an R script
 source("LABELS.R") 
 #source("LINK.R")
+#source("https://raw.githubusercontent.com/burrelvannjr/methods_csuf/master/resources/data/LABELS_script.R")
 
 #call a VARIABLE within the DATA
 DATA1$VARIABLE
