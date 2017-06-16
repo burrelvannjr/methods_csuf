@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{authblk} %package for blocking authors, followed by blocking affiliation
+\usepackage{url}
+\usepackage{ulem} % when using ulem package, must change \emph to \it for italics.
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,linkcolor=black]{hyperref} %hyperref 
+\usepackage{array}
+\usepackage{amssymb,amsmath,tabu}
+\usepackage{hyperref}
+\setlength\parindent{0pt}
+\usepackage[english]{babel}
+
+
+\begin{document}
+\title{Homework 2}
+\author[*]{}
+\date{}
+\maketitle
+
+
+
+\section*{Overview:}
+In this assignment, you'll be using R/RStudio and the GSS data set (2014) to report bivariate statistics for two dependent variables of interest. These variables must be different than the ones I present in the example below (unless you've discussed it with me). Remember, I want you to select variables that interest you, that way you could use these analyses for your final paper. Finally, the only bivariate relationship you will report for this analysis is a {\bf{correlation}} between two variables.
+
+\subsection*{What you will need:}
+The following can be downloaded from our course website
+\begin{itemize}
+\item \textbf{hw2\_script.R}
+\item \textbf{GSS2014\_final.csv} aka GSS Data Set (2014)
+\item \textbf{LABELS\_script.R}
+\item \textbf{GSS Variables and Descriptions.pdf}
+\item \textbf{GSS\_Codebook.pdf}
+\end{itemize}
+
+
+\subsection*{Tasks:}
+\begin{itemize}
+\item Open up the Homework 2 script/code file (\textbf{hw2\_script.R}). This is the file you'll be working from.
+\item Set your working directory
+\item Load the required packages/libraries
+\item Load the data set (\textbf{GSS2014\_final.csv}).
+\item Load the cleaner/labels file (\textbf{LABELS\_script.R}).
+\item Select two (2) interval/continuous dependent variables that interest you. To do so, you will need to look through the list of variables (\textbf{GSS Variables and Descriptions.pdf}). Once you've selected two variables, locate them in the codebook (\textbf{GSS\_Codebook.pdf}) to figure out how those variables are coded.
+\end{itemize}
+
+
+\subsection*{What you will turn in:}
+\begin{itemize}
+\item A brief paragraph describing:
+	\begin{itemize}
+	\item A sentence or two about the data set you're using for these variables.
+	\item For each variable, a sentence or two describing the variable name and its description.
+	\end{itemize}	
+\item A table with that lists the correlation between the variables, and a description/interpretation of the relationship (use the Cohen 1988 cutoffs to figure out the size of the correlation: \href{http://www.psychology.emory.edu/clinical/bliwise/Tutorials/SCATTER/scatterplots/effect.htm}{less than or equal to .29 is small, between .30 and .49 is moderate, and greater than or equal to .50 is large}). 
+\item The text of your R code/script on a separate page.
+\end{itemize}
+
+\newpage
+\section*{\center Example Homework 2}
+
+\subsection*{1: Data Set Description}
+The data for this assignment come from the General Social Survey administered in 2014. The data set has 2,538 observations, with individuals as the unit of analysis. \newline
+
+\subsection*{2: Variable Descriptions}
+The two outcome variables I selected were \textbf{POLVIEWS} and \textbf{OPPSEGOV}. The variable \textbf{POLVIEWS} is a continuous measure of conservatism that ranges from 1 to 7, with higher scores on this variable indicating higher levels of conservatism. The text of the variable is as follows:
+\begin{quote}
+``We hear a lot of talk these days about liberals and conservatives. I'm going to show you a seven-point scale on which the political views that people might hold are arranged from extremely liberal--point 1--to extremely conservative-- point 7. Where would you place yourself on this scale?''
+\end{quote}
+
+The variable \textbf{OPPSEGOV} is a continuous measure on the importance of civil disobedience that ranges from 1 to 7, with higher scores indicating that the respondent believes civil disobedience is more important. The text of the variable is as follows:
+\begin{quote}
+``That citizens may engage in acts of civil disobedience when they oppose government actions.''\newline
+\end{quote}
+
+
+
+\subsection*{3: Correlation Table}
+\begin{center}
+\begin{tabular}{ >{$}c<{$}  >{$}c<{$}  >{$}c<{$} }
+  Variable & POLVIEWS & OPPSEGOV \\
+  \hline
+  POLVIEWS & 1.000000 &  \\
+  OPPSEGOV & -0.1659262 & 1.000000 \\
+  \hline
+\end{tabular}
+\end{center}
+
+The correlation between \textbf{POLVIEWS} and \textbf{OPPSEGOV} is weak and negative (and significant, since {\it{p $< $.001}}). This indicates that as one variable increases, the other decreases. People with higher levels of conservatism (i.e. higher values of \textbf{POLVIEWS}) believe that civil disobedience against the government is not important (i.e. lower levels of \textbf{OPPSEGOV}).
+
+\newpage
+
+\subsection*{4: R Code/Script for Homework 2}
+\begin{verbatim}
+setwd("/Users/burrelvannjr/Dropbox/methods_csuf")
+
+library(psych)
+library(Hmisc)
+library(RCurl)
+
+DATA1<-read.csv("resources/data/GSS2014_cleaned_nm.csv",header=TRUE,sep=",")
+source("resources/data/LABELS_script.R")
+
+DATA1$polviews
+DATA1$oppsegov
+
+cor.test(DATA1$polviews, DATA1$oppsegov)
+
+\end{verbatim}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
