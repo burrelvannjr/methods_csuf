@@ -1,0 +1,303 @@
+\documentclass{article}
+\usepackage[margin=1.0in]{geometry} %change all margins to 1.0 inches (except the title, but moves up)
+%\documentclass[12pt]{article}
+%\usepackage[margin=.8in]{geometry} 
+%\usepackage{authblk} %package for blocking authors, followed by blocking affiliation
+\usepackage{url}
+\usepackage{ulem} % when using ulem package, must change \emph to \it for italics.
+\usepackage{hyperref} %allow for hyper links
+\usepackage [english]{babel}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+\usepackage[T1]{fontenc} %add encoding for small caps
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+\usepackage{titling} %title margin editing
+\setlength{\droptitle}{-.75in} %size of top margin
+\usepackage{setspace}
+\usepackage{changepage} %changes margins using adjustwidth
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage{longtable}
+\usepackage[super]{nth}
+\usepackage{paralist} %to use compact item stuff
+\makeatletter
+\newcommand\tabfill[1]{%
+\dimen@\linewidth%
+\advance\dimen@\@totalleftmargin%
+\advance\dimen@-\dimen\@curtab%
+\parbox[t]\dimen@{\raggedright #1\ifhmode\strut\fi}%
+}
+%%%%below changes footer to special footer with name and page number
+\usepackage{fancyhdr}
+\pagestyle{fancy} %can be {fancy}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+%%%%above changes footer to special footer with name and page number
+\begin{document}
+%\date{today}
+%\maketitle
+
+\begingroup  
+  \centering
+  \begin{spacing}{1.5} %begins 1.5 spacing
+  \textsc{\textbf{\LARGE{Social Research Methods}}} %textsc is small caps, textbf is bold font, huge is largest font possible
+  \end{spacing}
+  \begin{spacing}{1.0} %begins single-spacing
+  \centerline{\large Sociology 302}
+  \centerline{\large Fall 2016}
+  %\centerline{\normalsize bvann@uci.edu \textbullet \space (714) 398-5815 \textbullet \space \href{http://www.burrelvannjr.com}{burrelvannjr.com}}
+  \end{spacing}
+\endgroup
+\raggedright %left-justifies text AKA does not justify all of text
+
+
+%\begingroup %date group start
+  %за\centerline{} %line space
+  %\centerline{} %line space
+   %\centerline{( {\it{\today}} )} %today's date, italicized with parentheses
+%\endgroup %end date group
+
+%\begin{singlespace}
+%use the escape character when a bad one... \ 
+%https://stackoverflow.com/questions/2894710/how-to-write-urls-in-latex
+Time: \textbf{M\&W: 11:30am--12:45pm} \hfill  \hfill Instructor: \textbf{Burrel Vann Jr} \\
+Room: \textbf{H--326A} \hfill  \hfill Email: \textbf{bjvann@fullerton.edu} \\
+Website: \textbf{\href{https://moodle-2016-2017.fullerton.edu/course/view.php?id=29870}{SOCI 302}} \hfill  \hfill Office: \textbf{CP--933} \\
+  \hfill  \hfill Office Hours: \textbf{M\&W: 10:30am--11:30am} \\
+%\end{singlespace}
+
+
+%\begin{singlespace}
+\section*{Course Description}
+This course is an introduction to methods of sociological research. This course will help you critically evaluate research and conduct research of your own. The topics covered in this course include the ethics of research, the relationship between theory and research, variables and measurement, causality, types of research (qualitative fieldwork and interviews, content analysis, and quantitative analysis), and the writing of research.\newline
+
+Students will conduct statistical analyses in SPSS. Importantly, given the growing use of open-source programs, and the increasing demand for programming skills, students \textit{may} be asked to duplicate their statistical analyses in the program RStudio.
+%%\end{singlespace}
+
+%\begin{singlespace}
+\section*{Course Objectives}
+\begin{itemize}
+\item To introduce students to logic of sociological research\vspace*{-.75em}
+\item To improve students' critical assessment of published research.\vspace*{-.75em}
+\item To gain a familiarity with the major methods of developing and answering
+sociological questions \vspace*{-.75em}
+\item To help students design a research proposal to answer a burning research question
+\end{itemize}
+
+
+\section*{Course Materials}
+\subsection*{Required}
+\textbf{Textbook} \newline
+Babbie, Earl. 2005. \textit{The Basics of Social Research}. \nth{2} Edition. Independence, KY: Wadsworth Publishing. 
+
+\subsection*{Recommended (Not Required)}
+Becker, Howard S. 2007. \textit{Writing for Social Scientists: How to Start and Finish Your Thesis, Book, or Article}. Chicago, IL:: University of Chicago Press. 
+
+
+
+
+\section*{Course Requirements}
+Students are required to attend all class meetings and participate in discussions, and turn in homework assignments and in-class exercises.\newline
+
+\textbf{Attendance/Participation/Readings (15 points)} \newline
+Attendance for this class is not mandatory, but on-time attendance is critical for your overall success in the course. If you miss a class meeting, look on the course website for material you may have missed. Second, if you find it difficult to understand some of the material, get in contact with your one or more of your classmates. Third, if you still find it difficult, set aside time to meet with me in office hours. If my office hours don't work, email me so that we can schedule a time to meet. I reserve the right to re-do a lecture.\newline
+
+Each weekly reading is geared toward helping you grasp of concepts about and the logic of sociological research. Each week, students will have to complete a set of between one and four readings, which will consist of a combination of readings from the required text and articles. All articles will be provided on Titanium. \newline
+
+\textbf{Research Question Quizzes (20 Points, 10 points each)} \newline
+During the semester, students are required to complete two (2) research question quizzes: one (1) practice quiz related to the student's general interest in sociology, and one (1) related to a topic that interests the student, using a dataset introduced in this course. These quizzes are designed to help you develop a strong research question for your final research proposal. Both quizzes ask the same questions but students are required to come up with new research questions related to their topic. The first (practice) quiz must be submitted by 9/2. The second quiz can be submitted until 11/4. \newline
+
+\textbf{Homework Assignments and Statistics Programs (30 Points, 10 points each)} \newline
+Near the middle of the semester, students will have to complete three (3) brief homework assignments where you apply univariate, bivariate, and multivariate statistical techniques to a data set of their choice (from a list on the course website). To complete the assignments, students will need to download and use two free statistical programs: R and its graphical user interface (GUI) R Studio. This means that each student must have access to a computer of their own or a campus computer with the programs installed. For each assignment, I will provide a script on the course website which we will use to conduct statistical analyses to a sample dataset. The only difference between these scripts/sample dataset and the homework assignment is that students will use the same scripts on a different dataset... the dataset they've chosen. These scripts are designed for students to practice conducting preliminary analyses for the final project. The scripts can also be used/adapted for future research projects. \newline
+
+
+\textbf{Draft Sections of the Final Research Proposal (60 Points, 20 points each)} \newline
+Before completing the final research proposal, students are required to submit early draft sections of their final paper. These three (3) sections include the introduction, the literature review, and the data/methods sections. These sections are essentially rough drafts. The process of drafting the paper in chunks, and turning them in weeks before the final paper is due, is designed to help students complete the work early, receive and incorporate feedback for improving the paper, and gets students accustomed to the process of writing up research. \newline
+
+\textbf{Final Research Proposal (100 points)} \newline
+At the end of the semester, instead of a final exam, each student is required to complete a final research proposal paper. This paper should look like a proposal you would submit the CSUF Institutional Review Board (IRB) or the National Science Foundation (NSF) if you were to actually conduct the study. The final proposal should be 3-5 pages in length, using ASA format (1-inch margins, 12-pt font). Shorter proposals are better: That is, if you can write a great proposal (with all the necessary information) in three pages rather than five pages, please do so. Do not ramble or fill up space unnecessarily. \newline
+
+
+\textbf{Exam (25 points)} \newline
+There will be one exam during the semester. The exam is multiple-choice/true-false, will consist of between 25 and 50 questions, and will be based on the topics covered in the
+readings. If you will miss an exam, you must inform the instructor before the start of the exam. \newline
+
+\textbf{Policy on Late Assignments and Make-Up Exams} \newline
+Make up exams are not guaranteed and will be dealt with on a case-by-case basis. Students are not guaranteed make-up exams. Arrangements to take an exam early may be made. In extreme emergencies, written documentation will be required before a later make-up exam is scheduled. In such cases, students will take a different and likely more difficult form of the exam.\newline
+
+\textbf{Extra Credit} \newline
+Students may be given the opportunity to complete one extra credit assignment on a topic decided by the instructor, worth a maximum of 15 points. I reserve the right to provide an extra credit assignment.
+
+\section*{Grading Breakdown}
+Final grades will be based on attendance/participation (15 points), two online research question quizzes (10 points each), one exam (25 points), three short homework assignments (10 points each), three draft proposal sections (20 points each), and a final research proposal (100 points) for a total of 250 points. A +/- grading system will not be used.
+
+\begin{tabbing}
+\quad \quad \quad \= Attendance/Participation \quad \quad \quad \= \tabfill{15}\\
+\> Research Question Quizzes \> \tabfill{20 (10 points each)}\\
+\> Exam 1 \> \tabfill{25}\\
+\> Homework Assignments \> \tabfill{30 (10 points each)}\\
+\> Draft Introduction Section \> \tabfill{20}\\
+\> Draft Literature Review Section \> \tabfill{20}\\
+\> Draft Data/Methods Section \> \tabfill{20}\\
+\> Final Research Proposal \> \tabfill{100}\\
+\> Total  \> \tabfill{250}
+\end{tabbing}
+
+\textbf{Letter Grades}
+\vspace*{-.5em}
+\begin{tabbing}
+\quad \quad \quad \= A = 90\% and above \\
+\> B = 80\% and above \\
+\> C = 70\% and above \\
+\> D = 60\% and above \\
+\> F = Below 60\% \\
+\end{tabbing}
+
+\section*{Classroom Conduct}
+Please be courteous to your classmates and me by remaining engaged and respectful. Students are expected to conduct themselves in a way that does not interfere with the educational experience of others. Additionally, turn cell phones and other electronic devices on silent during class time. Laptops may be used for taking notes or running analyses while in class.
+
+
+\section*{Academic Dishonesty}
+The California State University, Fullerton policy on academic integrity is explained in \href{http://www.fullerton.edu/senate/publications_policies_resolutions/ups/UPS%20300/UPS%20300.021.pdf}{University Policy Statement 300.021}. All work you turn in, including homework assignments, exams, and quizzes must be your own.
+
+\section*{Students with Special Needs}
+Please inform the instructor during the first week of classes about any disability or special needs that you may have that may require specific arrangements related to attending class sessions, carrying out class assignments, or writing papers or examinations. According to California State University policy, students with disabilities must document their disabilities at the Disability Support Services (DSS) Office in order to be accommodated in their courses. Additional information can be found at the \href{http://www.fullerton.edu/dss/}{DSS website}, by calling 657-278-3112, or by email at dsservices@fullerton.edu.
+
+\section*{Changes to Material}
+I reserve the right to make changes to the syllabus, including the course outline, at any time, based on the pace of the class.
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+\section*{Course Schedule}
+
+\subsubsection*{1 - \textit{Introductions; The Basics of Social Research}}
+\begin{itemize}
+\item \textbf{Chapter(s)}: 1 
+\item \textbf{Due}: Online Introductions (8/22 @ 5pm)
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{2 - \textit{Theory; The Ethics of Social Research; Research Design, Variables, and Causality}}
+\begin{itemize}
+\item \textbf{Chapter(s)}: 2 (pp. 45--58); 3; 4
+\item \textbf{Article(s)}: ``Developing a Research Question''
+\item \textbf{Due}: Example Research Question Quiz (9/2 @ 5pm)
+\end{itemize} 
+
+\vspace{3pt}
+
+\subsubsection*{3 - \textit{NO-CLASS: Labor Day (9/5); Conceptualization and Operationalization}}
+\begin{itemize}
+\item \textbf{Chapter(s)}: 5
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{4 - \textit{Sampling}}
+\begin{itemize}
+\item \textbf{Chapter(s)}: 7
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{5 - \textit{Review for Exam 1 (9/19); Exam 1 (9/21)}}
+
+\vspace{3pt}
+
+\subsubsection*{6 - \textit{Fieldwork and Qualitative Analysis}}
+\begin{itemize}
+\item \textbf{Chapter(s)}:  10 \& 13
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{7 - \textit{Unobtrusive Research; Quantitative Analysis}}
+\begin{itemize}
+\item \textbf{Chapter(s)}:  11 \& 14
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{8 - \textit{``Bringing Race Home'' Exercise; Introduction to R}}
+\begin{itemize}
+\item \textbf{Exercise}: Explore \textbf{\href{https://demographics.virginia.edu/DotMap/}{Racial Dot Map}}
+\item \textbf{Due}: Download R \& RStudio
+\item \textbf{Due}: Select Variables for Final Research Proposal
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{9 - \textit{Univariate Statistics in R}}
+\begin{itemize}
+\item \textbf{Due}:  HW1 (10/21)
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{10 - \textit{Bivariate Statistics in R}}
+\begin{itemize}
+\item \textbf{Due}:  HW2 (10/28)
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{11 - \textit{Multivariate Statistics in R}}
+\begin{itemize}
+\item \textbf{Due}:  HW3 (11/4)
+\item \textbf{Due}:  Research Question Quiz for Selected Variables (11/4 @ 5pm)
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{12 - \textit{Writing Sociological Research}}
+\begin{itemize}
+\item \textbf{Chapter(s)}:  15 
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{13 - \textit{Small Group Discussions: Research Question and Introduction}}
+\begin{itemize}
+\item \textbf{Article(s)}:  ``Example Research Proposal''; ``Writing an Introduction''; ``Writing a Literature Review''
+\item \textbf{Due}:  Draft Introduction Section (11/18 @ 5pm)
+\end{itemize}
+
+\vspace{3pt}
+
+\subsubsection*{14 - NO CLASS: Fall/Thanksgiving Break \newline} 
+
+\vspace{3pt}
+
+\subsubsection*{15 - \textit{Small Group Discussions: Literature Review}}
+\begin{itemize}
+\item \textbf{Due}:  Draft Literature Review Section (12/2 @ 5pm)
+\end{itemize} 
+
+\vspace{3pt}
+
+\subsubsection*{16 - \textit{Small Group Discussions: Data \& Methods}}
+\begin{itemize}
+\item \textbf{Due}:  Draft Data \& Methods Section (12/9 @ 5pm)
+\end{itemize} 
+
+\vspace{3pt}
+
+\subsubsection*{Finals Week}
+\begin{itemize}
+\item \textbf{Due}: Final Research Proposal (12/16 @ 12pm NOON)
+\end{itemize}
+
+
+
+\end{document}
