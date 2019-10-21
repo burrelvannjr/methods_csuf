@@ -78,7 +78,7 @@ Install the packages from the repository
 install.packages("MASS")
 install.packages("psych")
 install.packages("Hmisc")
-install.packages("RCurl")
+#install.packages("RCurl")
 ```
 
 # 
@@ -89,7 +89,7 @@ Load the packages as libraries
 library(MASS)
 library(psych)
 library(Hmisc)
-library(RCurl)
+#library(RCurl)
 ```
 
 
