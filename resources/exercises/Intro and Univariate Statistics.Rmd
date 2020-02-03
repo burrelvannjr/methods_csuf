@@ -14,9 +14,9 @@ We will be using [R](http://cran.stat.ucla.edu/), an open-source statistical pro
 
 1. Go to the [**R website**](http://cran.stat.ucla.edu/) to download the program. Under the "Download and Install R" section, select the distribution that matches your computer's operating system (macOS/OSX, Windows, Linux). 
 
-    + For Mac Users: On the next page, under the "Files" section, select the first file/link (which should be something like "R-3.6.1.pkg")
+    + For Mac Users: On the next page, under the "Files" section, select the first file/link (which should be something like "R-3.x.x.pkg")
 
-    + For Windows Users: On the next page, select the link/word "base". On the following page, select the large link (which should be something like "Download R 3.6.1 for Windows")
+    + For Windows Users: On the next page, select the link/word "base". On the following page, select the large link (which should be something like "Download R 3.x.x for Windows")
 
     + For Linux Users: On the next page, select your specific distribution, and follow the instructions.
 
@@ -51,20 +51,25 @@ And the Plot/Viewer window, where your output figures/diagrams, help information
 
 ### Getting Familiar with R
 
-Before running analyses, you have to set your working directory. This is the folder where your data/output is and will be saved. For example:
+#
+
+#### Setting the Working Directory
+
+Before running analyses, you have to set your working directory. This is the folder where your data/output is and will be saved. For example, I use the following:
 
 ```{r}
-setwd("/Users/burrelvannjr/Desktop")
+setwd("/Users/burrelvannjr/Desktop/PA606")
 ```
 
 # 
 
-This will be different for you. To set your working directory, use <span style="color:blue">`setwd("directory")`</span>, using the location of your folder in place of the word "directory".
+This will be different for you. To set your working directory, use <span style="color:blue">`setwd("directory")`</span>, and replace the word "directory" with the *pathname* of the folder you want to be your directory (or under the **Session** menu, select **Set Working Directory**, then select **Choose Directory** and navigate to your desired folder).
 
+#
 
-Througout the script, you'll also notice text with a hashtag or pound sign preceding it, like this <span style="color:green">`#this is how you set your working directory`</span>. This is a **comment**, which is just a note to yourself. Comments remind the user what the a bit of code is supposed to do.
+#### Installing Packages and Loading them for Use as Libraries
 
-Because R is and open-source statistical program, many of its functions are built by programmers in the form of **packages** or **libraries**. We will be using two packages in this exercise: the <span style="color:blue">`MASS`</span> and <span style="color:blue">`psych`</span> packages. In addition, sometimes you will need to pull in data from a file on the internet, and give your variables a description. For these tasks, we will need two more packages, the <span style="color:blue">`Hmisc`</span> and <span style="color:blue">`RCurl`</span> packages In order to get packages working, you must first install the packages then load the packages.
+Because R is and open-source statistical program, many of its functions are built by programmers in the form of **packages** or **libraries**. We will be using four packages in this exercise: the <span style="color:blue">`MASS`</span>, <span style="color:blue">`psych`</span>, <span style="color:blue">`lattice`</span>, and <span style="color:blue">`mosaic`</span> packages. 
 
 ```{r, echo=F}
 options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
@@ -77,26 +82,81 @@ Install the packages from the repository
 ```{r, results="hide", warning=FALSE}
 install.packages("MASS")
 install.packages("psych")
-install.packages("Hmisc")
-#install.packages("RCurl")
+install.packages("lattice")
+install.packages("mosaic")
 ```
 
 # 
+
+#
 
 Load the packages as libraries
 
 ```{r, results="hide", warning=FALSE, message=FALSE}
 library(MASS)
 library(psych)
-library(Hmisc)
-#library(RCurl)
+library(lattice)
+library(mosaic)
 ```
 
+#
+
+#
+
+#### A Note on Commenting
+
+Througout any script, you'll also notice a line of text with a pound sign (e.g. hashtag) preceding it, like this <span style="color:green">`#this is a how to calculate a mean`</span>. This is a **comment**, which is just a note to yourself. Comments remind the user what the a bit of code is supposed to do.
+
+#
+
+#
 
 
 ### Working with Data 
 
-The <span style="color:blue">`MASS`</span> package comes with a great data set on car manufacturers called <span style="color:blue;background:none">`mtcars`</span>. To use the <span style="color:blue">`mtcars`</span> data, you must call it. Calling the data will load it into your console window
+#
+
+#### Calculations
+
+In R/RStudio, we can use the Script (and Console) window to make calculations. For example, we can run the following...
+
+```{r}
+3 + 2
+```
+
+#
+
+#### The Assignment Operator for Creating Objects
+
+The great thing about R is that it uses Object-Oriented Programming, meaning that you can assign a name to an object (like a data set), which will create a working copy in your computer's memory for you to run operations on. To do so, you simply must assign a name using a *left arrow* (the assignment operator) like this: <span style="color:blue">`new_object<-dataset`</span>. 
+
+Yet, because R is an object-oriented programming language, you can assign **object names** to any calculation or data set. This creates a working copy of the calculation (or data set) in R's memory that you can run operations on. To do so, you simply must assign an object name using a *left arrow* (the assignment operator) like this: <span style="color:blue">`new_object <- dataset`</span>.  For example, we could run...
+
+```{r}
+x <- 3 + 2
+```
+
+... and then run...
+
+```{r}
+x
+```
+
+... which gives us the same result, but now we can run manipulations on the new object (or variable) **x**.
+
+
+#### Reading in CSV Data Sets
+
+Many data sets that researchers work with come in the form of a **CSV** file. A CSV (Comma Separated Values) file is just a Microsoft Excel spreadsheet (with rows as observations and columns as variables), that is converted into CSV format. 
+
+A CSV file must be "read" into the R environment for you to use it. To do so, you'll have to call in the CSV file (data set) with one of R's functions: the <span style="color:blue">`read.csv`</span> function. Additionally, you will have to give the CSV a new object name (using the assignment operator **<-**), so we can place it in our working environment. You can do it like this, changing the word "PATHNAME" to the pathname to the csv file you're reading into the R environment: 
+    + <span style="color:blue">`data1 <- read.csv("PATHNAME.csv", header=TRUE, sep=",")`</span>. 
+
+#
+
+#### Working with Stock Data Sets in R
+
+Fortunately, nearly every package in R comes with a data set that R users can use. The <span style="color:blue">`MASS`</span> package, for example, comes with a great data set on car manufacturers called <span style="color:blue;background:none">`mtcars`</span>. To use this <span style="color:blue">`mtcars`</span> data set, you must call it. Calling the data will load it into your console window. To call a stock data set, just type in the name of the data set (*Note: The data set you're calling must come from a package that is already LOADED into your R session*). Because the <span style="color:blue;background:none">`MASS`</span> package is already loaded, we can call our <span style="color:blue;background:none">`mtcars`</span> data set as such...
 
 ```{r}
 mtcars
@@ -104,22 +164,16 @@ mtcars
 
 # 
 
-While this is great, and the dataset is loaded into your console window, you will need a local copy to run operations on. The great thing about R is that it uses Object-Oriented Programming, meaning that you can assign a name to an object (like a data set), which will create a working copy in your computer's memory for you to run operations on. To do so, you simply must assign a name using a *left arrow* (the assignment operator) like this: <span style="color:blue">`new_object<-dataset`</span>. So to work with the <span style="color:blue">`mtcars`</span> data, you should call it something new, like this:
+While this is great, and the dataset is loaded into your console window, you will need a local copy to run operations on. To create a local copy (an object) so that you can run manipulations on the <span style="color:blue">`mtcars`</span> data, you should create a new object, like this:
 
 ```{r}
-data1<-mtcars
+data1 <- mtcars
 ```
 
 # 
-  * For your homework and in all your future work, you'll need to read in a separate data set that exists on your computer or from an online source, not in one of R's packages. To do so, you'll have to use the assignment operator to call in data with one of R's functions (the <span style="color:blue">`read.csv`</span>. You can do it like this, changing the word "DATA" to the actual name the csv file you're bringing in: 
-    + <span style="color:blue">`data1<-read.csv("DATA.csv",header=TRUE,sep=",")`</span>. 
-  * Also, using the <span style="color:blue">`RCurl`</span> package, we can pull in data from the web by replacing the word "LINK" with the link to the data file you want to use:
-    + <span style="color:blue">`data1<-read.csv(text=getURL("LINK.csv"))`</span>
 
-  * Also, using the <span style="color:blue">`Hmisc`</span> package, we can add variable labels to the data set by reading in a separate LABELS file
-    + <span style="color:blue">`source("LABELS.R")`</span>
-  * or you can pull in the script from the web by replacing the word "LINK" with the link to the script file:
-    + <span style="color:blue">`source("LINK.R")`</span>
+
+
 
     
 # 
@@ -127,6 +181,8 @@ data1<-mtcars
 Like above, you can now call <span style="color:blue">`data1`</span>, and it will load the same data set into your console window (not shown here). In addition, in RStudio, after you give the data a new name (converting it to a usable object), you can view the data in your upper-right **Environment** window.
 
 # 
+
+#### Calling information for a variable
 
 
 To call a specific *variable* or column within the data set, you simply use the dollar sign operator <span style="color:blue">`$`</span>, in the form of <span style="color:blue">`data$variable`</span>. To call the <span style="color:blue">`mpg`</span> variable from the new <span style="color:blue">`data1`</span> data set, we use the following.
@@ -137,32 +193,27 @@ data1$mpg
 
 ### Univariate Statistics
 
-There are various ways to call a number of univariate statistics in R. As social scientists, the main univariate statistics we are concerned with are the mean, median, standard deviation, minimum, maximum, and range. The stock R program comes with the <span style="color:blue">`summary`</span> function. 
+There are various ways to call a number of univariate statistics in R. As social scientists, the main univariate statistics we are concerned with are the mean, median, standard deviation, minimum, maximum, and range. The stock R program comes with the <span style="color:blue">`summary`</span> function, which, unfortunately, does not provide the *some* measures. Therefore, we use the <span style="color:blue">`describe`</span> function from the <span style="color:blue">`psych`</span> package. We can call univariate statistics for both the full data set and a specific variable.
 
-```{r}
-summary(data1)
-```
+#
 
-# 
-
-This calls univariate statistics for all variables in the data set, but you can also call these same univariate statistics for individual variables, like:
-
-```{r}
-summary(data1$mpg)
-```
-
-# 
-
-However, the stock function does not provide the measures for Standard Deviation or Range. Therefore, we can use the <span style="color:blue">`describe`</span> function from the <span style="color:blue">`psych`</span> package. Again, we can call the statistics for both the full data set and a specific variable.
+For the full data set, we can call univariate statistics as such... 
 
 ```{r}
 describe(data1)
+```
+
+#
+
+Whereas, for a specific variable, we can call univariate statistics as such...
+
+```{r}
 describe(data1$mpg)
 ```
 
 # 
 
-In addition, you can call desired univariate statistics. Here, we'll run the statistics on the <span style="color:blue">`mpg`</span> variable.
+Beyond using the <span style="color:blue">`describe`</span> function, you can call singular desired univariate statistics. Here, we'll ask for a specific univariate statistic, one at a time, for the <span style="color:blue">`mpg`</span> variable.
 
 ```{r}
 mean(data1$mpg)
@@ -175,39 +226,31 @@ range(data1$mpg)
 
 # 
 
-You'll notice there's a range problem. To fix this, we can incorporate our assignment operator <span style="color:blue">`<-`</span> to create new variables in working memory. An appropriate range value is the difference between the maximum and minimum values. Using this knowledge, we can solve the problem ourselves.
+
+##### Visualizing Univariate Statistics
+
+In addition, you can create a visual representation (plot) of univariate data using a histogram. Use the <span style="color:blue">`histogram`</span> function from the <span style="color:blue">`lattice`</span> package to plot a histogram.
 
 ```{r}
-min1<-min(data1$mpg)
-max1<-max(data1$mpg)
-max1-min1
+histogram(~ mpg, data = data1, main = "Histogram of 'Miles per Gallon'", type = "count") 
 ```
 
-# 
+#
 
-or another way...
+Now plot the histogram with a normal curve overlaid, including the placement of the mean. 
 
+#
 ```{r}
-range1<-max1-min1
-range1
+histogram(~ mpg, data = data1, main = "Histogram of 'Miles per Gallon'", 
+          type = "density", 
+          panel=function(x, ...) {
+            panel.histogram(x, ...)
+            panel.abline(v=mean(x, na.rm = TRUE),col="red")
+            panel.mathdensity(dmath=dnorm, col="black", 
+                              args=list(mean=mean(x, na.rm = TRUE),
+                                        sd=sd(x, na.rm = TRUE)), ...)            
+          }) 
 ```
-
-# 
-
-or another way, without renaming anything
-
-```{r}
-max(data1$mpg)-min(data1$mpg)
-```
-
-# 
-
-In addition, you can create a visual representation (plot) of the univariate data using a histogram. Use the <span style="color:blue">`hist`</span> function to plot a histogram.
-
-```{r}
-hist(data1$mpg)
-```
-
 
 ### Working with Random, Normally-Distributed Data
 
