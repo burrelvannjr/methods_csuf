@@ -128,9 +128,10 @@ In R/RStudio, we can use the Script (and Console) window to make calculations. F
 
 #### The Assignment Operator for Creating Objects
 
-The great thing about R is that it uses Object-Oriented Programming, meaning that you can assign a name to an object (like a data set), which will create a working copy in your computer's memory for you to run operations on. To do so, you simply must assign a name using a *left arrow* (the assignment operator) like this: <span style="color:blue">`new_object<-dataset`</span>. 
+#
 
-Yet, because R is an object-oriented programming language, you can assign **object names** to any calculation or data set. This creates a working copy of the calculation (or data set) in R's memory that you can run operations on. To do so, you simply must assign an object name using a *left arrow* (the assignment operator) like this: <span style="color:blue">`new_object <- dataset`</span>.  For example, we could run...
+
+The great thing about R is that, because it is an object-oriented programming language, you can assign **object names** to any calculation or data set. This creates a working copy of the calculation (or data set) in R's memory that you can run operations on. To do so, you simply must assign an object name using a *left arrow* (the assignment operator) like this: <span style="color:blue">`new_object <- dataset`</span>.  For example, we could run...
 
 ```{r}
 x <- 3 + 2
@@ -182,7 +183,7 @@ Like above, you can now call <span style="color:blue">`data1`</span>, and it wil
 
 # 
 
-#### Calling information for a variable
+#### Calling information for a Variable
 
 
 To call a specific *variable* or column within the data set, you simply use the dollar sign operator <span style="color:blue">`$`</span>, in the form of <span style="color:blue">`data$variable`</span>. To call the <span style="color:blue">`mpg`</span> variable from the new <span style="color:blue">`data1`</span> data set, we use the following.
@@ -211,6 +212,16 @@ Whereas, for a specific variable, we can call univariate statistics as such...
 describe(data1$mpg)
 ```
 
+#
+
+In addition, we can call univariate statistics for a variable but broken out by groups/categories of another variable. Note, this is the first step towards bivarate statistics (looking at the relationship between two variables). We do this by using the <span style="color:blue">`describeBy`</span> function, where we list the main variable first, and the grouping/category variable second... as such... 
+
+```{r}
+describeBy(data1$mpg, data1$cyl)
+```
+
+#
+Above, we can see that the mean miles per gallon differs by the number of cylinders in a car (e.g. cars with lower cylinders have, on average, higher miles per gallon).
 # 
 
 Beyond using the <span style="color:blue">`describe`</span> function, you can call singular desired univariate statistics. Here, we'll ask for a specific univariate statistic, one at a time, for the <span style="color:blue">`mpg`</span> variable.
