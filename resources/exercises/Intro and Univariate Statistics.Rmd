@@ -222,7 +222,38 @@ describeBy(data1$mpg, data1$cyl)
 
 #
 Above, we can see that the mean miles per gallon differs by the number of cylinders in a car (e.g. cars with lower cylinders have, on average, higher miles per gallon).
+
+#### A Note on Skewness and Kurtosis
+
+**Skewness** is the measure of how close or far a distribution is from symmetry (the normal curve). It measures the clustering of scores along the X-axis, with regard to the position of the mode, median, and mean. **Kurtosis** is a measure of the *peakedness* of the distribution - how high or low the distribution is on the Y-axis, and how different it is from mesokurtic (e.g. middle kurtosis, or the normal curve).
+
+#
+
+Skewness ranges from $-\infty$ to $\infty$. The sign indicates the type of skew, with $-$ indicating negative skewness, $+$ indicating positive skewness, and 0 indicating *no* skew... (AKA symmetry, AKA the normal curve). The cutoffs for skewness are as follows:
+
+High: $\geq |1|$
+
+Moderate: $|1| \geq x \geq |.5|$
+
+Low: $|.5| \geq x \geq |0|$
+
+#
+#
+
+Statisticians have developed a kurtosis measure that represents *excess* kurtosis beyond the normal curve (*although typical kurtosis ranges from 1 to $+ \infty$*). This measure ranges from $-2$ to $+ \infty$. Using this metric, we know that, generally, negative values represent platykurtic distributions and positive values indicate leptokurtic distributions. Distributions close to a kurtosis value of 0 are considered mesokurtic. We use cutoffs to indicate types of kurtosis, as follows...
+
+Platykurtic: $0 \geq x \geq -2$
+
+Mesokurtic: $1 \geq x \geq 0$
+
+Leptokurtic: $+ \infty \geq x \geq 1$
+
+
+
+
 # 
+
+#### Calling Specific Univariate Statistics
 
 Beyond using the <span style="color:blue">`describe`</span> function, you can call singular desired univariate statistics. Here, we'll ask for a specific univariate statistic, one at a time, for the <span style="color:blue">`mpg`</span> variable.
 
@@ -238,17 +269,25 @@ range(data1$mpg)
 # 
 
 
-##### Visualizing Univariate Statistics
+### Assessing Normality by Using Visualizations
 
-In addition, you can create a visual representation (plot) of univariate data using a histogram. Use the <span style="color:blue">`histogram`</span> function from the <span style="color:blue">`lattice`</span> package to plot a histogram.
+#### Histograms
+
+In addition, you can create a visual representation (plot) of univariate data using a histogram. For quickly plotting the histogram of one variable, we can use R's stock <span style="color:blue">`hist`</span> function, as such...
+
+```{r}
+hist(data1$mpg) 
+```
+
+#
+
+However, as we begin to move into analyzing bivariate relationships, we may find it necessary to visualize histograms by overlaying normal curves (to demonstrate normality) or to break out the histogram by levels or categories of different variables (to demonstrate within group normality). As such, we should rely on the <span style="color:blue">`histogram`</span> function from the <span style="color:blue">`lattice`</span> package to plot a histogram.
 
 ```{r}
 histogram(~ mpg, data = data1, main = "Histogram of 'Miles per Gallon'", type = "count") 
 ```
 
-#
-
-Now plot the histogram with a normal curve overlaid, including the placement of the mean. 
+This should look *similar* to the plot produced by the <span style="color:blue">`hist`</span> function, but it differs in that we can do much more... such as plotting the histogram with a normal curve overlaid, including the placement of the mean. 
 
 #
 ```{r}
@@ -261,6 +300,75 @@ histogram(~ mpg, data = data1, main = "Histogram of 'Miles per Gallon'",
                               args=list(mean=mean(x, na.rm = TRUE),
                                         sd=sd(x, na.rm = TRUE)), ...)            
           }) 
+```
+
+
+
+Or plotting the histogram for mpg broken out by cylinders...  
+
+```{r}
+histogram(~ mpg | cyl, data = data1, type = "count", main = "Histogram of 'Miles per Gallon' by 'Cylinder'")
+```
+
+#
+
+
+
+
+#### Boxplots (Box-and-Whisker Plots)
+
+Boxplots also provide a visual representation of the normality of a distribution. The boxplot has a box, a line through the box, two whiskers on either end of the box, and sometimes dots/points outside the whiskers. Below, we get a sense of what each part of the boxplot represents...
+
++ Bottom (or left end) of the **whisker** represents the minimum score for that variable's distribution
++ Bottom (or left end) of the **box** represents the first quartile (the 25th percentile case)
++ Middle line (or dot) inside the **box** represents the median, also known as the second quartile (the 50th percentile case)
++ Top (or right end) of the **box** represents the third quartile (the 75th percentile case)
++ Top (or right end) of the **whisker** represents the maximum score for that variable's distribution
++ Outside dots represent outliers - extreme high or extreme low values for that variable. 
+
+#
+#
+
+To tell if a variable is normally-distrubted using the box-and-whisker plot, generally, we want to see that there is *some* distance between the box and the end of the whiskers, that the box isn't pushed too close to either whisker, that the median line (dot) is near the center of the box, and that there aren't many outliers (dots) on the outside of the whiskers.
+
+#
+
+
+To plot a boxplot, we use the following... (notice that when you're plotting one variable, the plot is displayed horizontally).
+
+
+```{r}
+bwplot(~mpg, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'mpg'")
+```
+
+#
+
+Further, to break this distribution out by *Cylinder*, we can do the following...
+
+
+```{r}
+bwplot(~mpg | cyl, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'mpg'")
+```
+
+
+#### Normal Q-Q (Quantile-Quantile) Plots
+
+Much as in the above, we want to assess whether or not our variable follows the normal distribution. As such, the quantile-quantile plot is a visual tool to help us figure out if the empirical distrubtion of our variable fits (or rather, comes from) a theoretical normal distribution.
+
+We fit a plot of our data/variable (usually on the Y-axis) against theoretical data that should occur if the data came from a normal distribution. If our data actually fit a normal curve, then the dots on the plot should follow a straight line, or be reasonably close to the line plotted. 
+
+Below, we can assess normality to determine whether our variable follows a normal distribution, as such... 
+
+
+```{r}
+xqqmath(~mpg, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Wr.Hnd'", xlab = "Expected Normal")
+```
+
+
+Additionally, we can break this plot out by another grouping variable. 
+
+```{r}
+xqqmath(~mpg | cyl, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Wr.Hnd' by 'Cylinder'", xlab = "Expected Normal")
 ```
 
 ### Working with Random, Normally-Distributed Data
