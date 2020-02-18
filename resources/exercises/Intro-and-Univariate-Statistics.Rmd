@@ -144,6 +144,37 @@ x
 
 ... which gives us the same result, but now we can run manipulations on the new object (or variable) **x**.
 
+#
+
+#### Creating a List as an Object
+
+Sometimes, for quick analyses, you may need to read in a list of numbers (in your working Environment). To read in a list, you use the concatenate <span style="color:blue">`c`</span> function. You can create a list by replaceing the word "LIST" from this with the actual list: <span style="color:blue">`c(OBJECT)`</span>. 
+
+To create an object out of a list of numbers, we could do the following...
+
+
+```{r}
+list <- c(1, 6, 3, 2, 7, 4, 6, 9)
+```
+
+
+Now that <span style="color:blue">`list`</span> is a useable object, we can run manipulations and univariate statistics on it (described below).
+
+```{r include = FALSE}
+mean(list)
+mean<-mean(list)
+sd(list)
+sd<-sd(list)
+n<-NROW(list)
+z<-1.96
+se<-((sd)/(sqrt(n)))
+list((mean-(z*se)),(mean+(z*se)))
+```
+
+
+#
+
+
 #### Removing Objects from your Enviornment
 
 Many times, we'll be working with several objects, and ultimately decide that some of them are no longer needed. In this case, we would want to tidy up our environment by removing an object. To do so, we must use the <span style="color:blue">`rm`</span> function. You can do it like this, changing the word "OBJECT" to the name of the object that you're trying to remove from the R environment: <span style="color:blue">`rm(OBJECT)`</span>. 
@@ -154,7 +185,7 @@ rm(x)
 
 
 
-#
+
 
 #### Reading in CSV Data Sets
 
