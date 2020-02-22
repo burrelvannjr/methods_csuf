@@ -1,0 +1,180 @@
+---
+title: "T-test"
+author: "Burrel Vann Jr"
+output: 
+  html_document: 
+    css: markdown3.css
+---
+<br>
+
+
+###### Page Navigation
+
+* [Intro to R](Intro-and-Univariate-Statistics.html)
+* [t-Test](t-test.html)
+
+<br>
+
+### What is the t-Test?
+
+The t-test examines the differences in means between **two** groups, in effort to see if the differences reflect true differences that we could expect to find in the population. 
+
+
+
+```{r, echo=F}
+options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
+```
+
+# 
+
+
+```{r, results="hide", warning=FALSE, message=FALSE, echo=FALSE}
+library(MASS)
+library(psych)
+library(lattice)
+library(mosaic)
+```
+
+#
+
+#### Assumptions and Diagnostics for the t-Test
+
+The assumptions for a t-test are...
+* Independence of Observations
+* Equal Sample Sizes
+* Homogeneity of Variance
+* Normality
+
+```{r, echo=FALSE}
+data1 <- mtcars
+```
+
+
+##### Independence of Observations (Examine Data Collection Strategy)
+* Groups are not related or dependent upon each other. Case can’t be in more than one group. No ties between observations.
+
+Examine data collection strategy to see if there are linkages between observations. 
+
+##### Equal Sample Sizes (Examine N for each group)
+* The number of cases in each group should be relatively similar. (If not, use pooled variance/unequal variances asssume t-test formula)
+
+##### Homogeneity of Variance (Examine SD^2^ for each group)
+* Both groups have approximately equal variances (SD^2^). The distributions (or spread) for the groups are approximately equal. Keppel & Zedeck (1989) suggest that variance comparison should not exceed 10:1 ratio (*or... alternatively, the SDs, when compared, should not exceed around a 3:1 ratio*). 
+
+For both of the above assumptions, we can examine the univariate data table, broken out by group:
+
+```{r}
+describeBy(data1$mpg, data1$am)
+```
+
+
+##### Normality (Examine Plots: Histogram, Q-Q Normality Plots, Box-and-Whiskers Plots)
+* Distribution must be relatively normal. (If violated, use “unequal variances assumed” formula, otherwise, use “equal variances assumed”)
+
+
+
+##### Histogram
+
+Plot the histogram for mpg (Y variable) broken out by manual transmission (levels of the X variable)...  
+
+```{r}
+histogram(~ mpg | am, data = data1, type = "count", main = "Histogram of 'Miles per Gallon' by 'Manual Transmission'")
+```
+
+#
+
+...next, overlay a normal curve...
+
+```{r}
+histogram(~ mpg | am, data = data1, main = "Histogram of 'Miles per Gallon' by 'Manual Transmission Type'", 
+          type = "density", 
+          panel=function(x, ...) {
+            panel.histogram(x, ...)
+            panel.abline(v=mean(x, na.rm = TRUE),col="red")
+            panel.mathdensity(dmath=dnorm, col="black", 
+                              args=list(mean=mean(x, na.rm = TRUE),
+                                        sd=sd(x, na.rm = TRUE)), ...)            
+          }) 
+```
+
+
+##### Boxplots (Box-and-Whisker Plots)
+
+Boxplots also provide a visual representation of the normality of a distribution. The boxplot has a box, a line through the box, two whiskers on either end of the box, and sometimes dots/points outside the whiskers. Below, we get a sense of what each part of the boxplot represents...
+
++ Bottom (or left end) of the **whisker** represents the minimum score for that variable's distribution
++ Bottom (or left end) of the **box** represents the first quartile (the 25th percentile case)
++ Middle line (or dot) inside the **box** represents the median, also known as the second quartile (the 50th percentile case)
++ Top (or right end) of the **box** represents the third quartile (the 75th percentile case)
++ Top (or right end) of the **whisker** represents the maximum score for that variable's distribution
++ Outside dots represent outliers - extreme high or extreme low values for that variable. 
+
+#
+#
+
+To tell if a variable is normally-distrubted using the box-and-whisker plot, generally, we want to see that there is *some* distance between the box and the end of the whiskers, that the box isn't pushed too close to either whisker, that the median line (dot) is near the center of the box, and that there aren't many outliers (dots) on the outside of the whiskers.
+
+#
+
+
+To plot a boxplot, broken out by *Manual Transmission*, we can do the following...
+
+
+```{r}
+bwplot(~mpg | am, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'mpg' by 'Manual Transmission Type'")
+```
+
+
+##### Normal Q-Q (Quantile-Quantile) Plots
+
+The quantile-quantile plot is a visual tool to help us figure out if the empirical distribution of our variable fits (or rather, comes from) a theoretical normal distribution.
+
+We assess normality an break this plot out by a grouping variable. 
+
+```{r}
+xqqmath(~mpg | am, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Wr.Hnd' by 'Manual Transmission Type'", xlab = "Expected Normal")
+```
+
+
+### The t-Test
+
+The calculation for the t-Test is:
+
+ $\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{SD_1^2}{n_1}+\frac{SD_2^2}{n_2}}}$
+ 
+where... <br>
+* $\bar{x}_1$ is the mean for group 1 <br>
+* $\bar{x}_2$ is the mean for group 2 <br>
+* $SD_1^2$ is the variance ($SD^2$) for group 1 <br>
+* $SD_2^2$ is the variance ($SD^2$) for group 2 <br>
+* $n_1$ is the number of observations ($N$) for group 1 <br>
+* $n_2$ is the number of observations ($N$) for group 2 <br>
+
+In addition, the degrees of freedom ($df$) for the test is...<br> 
+$df = n_1 + n_2 -2$ (aka $df = N-2$)
+
+
+### Running the t-Test in R
+
+
+
+To run the t-test in R, we take the summary (output) of the analysis of variance <span style="color:blue">`aov`</span> function.
+
+
+```{r}
+summary(aov(data1$mpg ~ data1$am))
+```
+
+
+To interpret the findings, we report the following information:
+
+* The test used
+* If you reject or fail to reject the null hypothesis
+* The variables used in the analysis
+* The degrees of freedom, calculated value of the test, and p-value
+  + $t(df) = t_{obtained},  p-value$
+
+“Using an independent samples t-test, I reject/fail to reject the null hypothesis that there is no mean difference between women’s mean beers in the fridge and men’s mean beers in the fridge, in the population, $t(?) = ?, p ? .05$” 
+
+
+<br><br><br>

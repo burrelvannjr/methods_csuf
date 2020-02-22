@@ -5,6 +5,15 @@ output:
   html_document: 
     css: markdown3.css
 ---
+<br>
+
+
+###### Page Navigation
+
+* [Intro to R](Intro-and-Univariate-Statistics.html)
+* [t-Test](t-test.html)
+
+<br>
 
 ### What is R?
 
@@ -374,7 +383,7 @@ Boxplots also provide a visual representation of the normality of a distribution
 #
 #
 
-To tell if a variable is normally-distrubted using the box-and-whisker plot, generally, we want to see that there is *some* distance between the box and the end of the whiskers, that the box isn't pushed too close to either whisker, that the median line (dot) is near the center of the box, and that there aren't many outliers (dots) on the outside of the whiskers.
+To tell if a variable is normally-distributed using the box-and-whisker plot, generally, we want to see that there is *some* distance between the box and the end of the whiskers, that the box isn't pushed too close to either whisker, that the median line (dot) is near the center of the box, and that there aren't many outliers (dots) on the outside of the whiskers.
 
 #
 
@@ -392,13 +401,13 @@ Further, to break this distribution out by *Cylinder*, we can do the following..
 
 
 ```{r}
-bwplot(~mpg | cyl, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'mpg'")
+bwplot(~mpg | cyl, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'mpg' by 'Cylinder'")
 ```
 
 
 #### Normal Q-Q (Quantile-Quantile) Plots
 
-Much as in the above, we want to assess whether or not our variable follows the normal distribution. As such, the quantile-quantile plot is a visual tool to help us figure out if the empirical distrubtion of our variable fits (or rather, comes from) a theoretical normal distribution.
+Much as in the above, we want to assess whether or not our variable follows the normal distribution. As such, the quantile-quantile plot is a visual tool to help us figure out if the empirical distribution of our variable fits (or rather, comes from) a theoretical normal distribution.
 
 We fit a plot of our data/variable (usually on the Y-axis) against theoretical data that should occur if the data came from a normal distribution. If our data actually fit a normal curve, then the dots on the plot should follow a straight line, or be reasonably close to the line plotted. 
 
