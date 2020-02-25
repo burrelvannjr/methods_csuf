@@ -1,19 +1,17 @@
 ---
 title: "T-test"
-author: "Burrel Vann Jr"
+#author: "Burrel Vann Jr"
 output: 
   html_document: 
     css: markdown3.css
 ---
-<br>
 
 
-###### Page Navigation
+###### Navigation
 
-* [Intro to R](Intro-and-Univariate-Statistics.html)
-* [t-Test](t-test.html)
+* [**Intro to R**](Intro-and-Univariate-Statistics.html)
+* [**t-Test**](t-test.html)
 
-<br>
 
 ### What is the t-Test?
 
@@ -40,6 +38,7 @@ library(mosaic)
 #### Assumptions and Diagnostics for the t-Test
 
 The assumptions for a t-test are...
+
 * Independence of Observations
 * Equal Sample Sizes
 * Homogeneity of Variance
@@ -143,6 +142,7 @@ The calculation for the t-Test is:
  $\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{SD_1^2}{n_1}+\frac{SD_2^2}{n_2}}}$
  
 where... <br>
+
 * $\bar{x}_1$ is the mean for group 1 <br>
 * $\bar{x}_2$ is the mean for group 2 <br>
 * $SD_1^2$ is the variance ($SD^2$) for group 1 <br>
@@ -157,24 +157,30 @@ $df = n_1 + n_2 -2$ (aka $df = N-2$)
 ### Running the t-Test in R
 
 
+To run the independent samples t-test in R, we take the summary (output) of the analysis of variance <span style="color:blue">`t.test`</span> function.
 
-To run the t-test in R, we take the summary (output) of the analysis of variance <span style="color:blue">`aov`</span> function.
+For t-test, within the <span style="color:blue">`t.test`</span> function, the dependent (interval-ratio level) variable is listed first and the independent (discrete/categorical) variable is listed second. 
+
+If you meet the assumptions of the t-test, you can **assume equal variances**, and therefore use the call <span style="color:blue">`var.equal=TRUE`</span> function. If you violate the assumptions, use the call <span style="color:blue">`var.equal=FALSE`</span> function.
 
 
 ```{r}
-summary(aov(data1$mpg ~ data1$am))
+t.test(data1$mpg ~ data1$am, var.equal=TRUE)
 ```
 
+In the output above, we see the t-obtained value (-4.1061, or rather, $\pm$ 4.1061), the degrees of freedom (30), and the p-value (.000285, which is less than our set alpha level of .05).
 
 To interpret the findings, we report the following information:
 
 * The test used
-* If you reject or fail to reject the null hypothesis
+* If you **reject** or **fail to reject** the null hypothesis
 * The variables used in the analysis
-* The degrees of freedom, calculated value of the test, and p-value
-  + $t(df) = t_{obtained},  p-value$
+* The degrees of freedom, calculated value of the test ($t_{obtained}$), and $p-value$
+  + $t(df) = t_{obtained}$, $p-value$
 
-“Using an independent samples t-test, I reject/fail to reject the null hypothesis that there is no mean difference between women’s mean beers in the fridge and men’s mean beers in the fridge, in the population, $t(?) = ?, p ? .05$” 
+“Using an independent samples t-test, I reject/fail to reject the null hypothesis that there is no mean difference between group 1 and group 2, in the population, $t(?) = ?, p ? .05$” 
+
+“Using an independent samples t-test, I reject the null hypothesis that there is no difference between the mean mpg of automatic and manual transmission cars, in the population, $t(30) = \pm 4.1061, p \leq .05$” 
 
 
 <br><br><br>

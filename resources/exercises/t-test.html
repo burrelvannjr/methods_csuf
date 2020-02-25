@@ -10,7 +10,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Burrel Vann Jr" />
 
 
 <title>T-test</title>
@@ -377,19 +376,16 @@ summary {
 
 
 <h1 class="title toc-ignore">T-test</h1>
-<h4 class="author">Burrel Vann Jr</h4>
 
 </div>
 
 
-<p><br></p>
-<div id="page-navigation" class="section level6">
-<h6>Page Navigation</h6>
+<div id="navigation" class="section level6">
+<h6>Navigation</h6>
 <ul>
-<li><a href="Intro-and-Univariate-Statistics.html">Intro to R</a></li>
-<li><a href="t-test.html">t-Test</a></li>
+<li><a href="Intro-and-Univariate-Statistics.html"><strong>Intro to R</strong></a></li>
+<li><a href="t-test.html"><strong>t-Test</strong></a></li>
 </ul>
-<p><br></p>
 </div>
 <div id="what-is-the-t-test" class="section level3">
 <h3>What is the t-Test?</h3>
@@ -402,7 +398,13 @@ summary {
 <h1></h1>
 <div id="assumptions-and-diagnostics-for-the-t-test" class="section level4">
 <h4>Assumptions and Diagnostics for the t-Test</h4>
-<p>The assumptions for a t-test are… * Independence of Observations * Equal Sample Sizes * Homogeneity of Variance * Normality</p>
+<p>The assumptions for a t-test are…</p>
+<ul>
+<li>Independence of Observations</li>
+<li>Equal Sample Sizes</li>
+<li>Homogeneity of Variance</li>
+<li>Normality</li>
+</ul>
 <div id="independence-of-observations-examine-data-collection-strategy" class="section level5">
 <h5>Independence of Observations (Examine Data Collection Strategy)</h5>
 <ul>
@@ -500,29 +502,47 @@ summary {
 <h3>The t-Test</h3>
 <p>The calculation for the t-Test is:</p>
 <p><span class="math inline">\(\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{SD_1^2}{n_1}+\frac{SD_2^2}{n_2}}}\)</span></p>
-<p>where… <br> * <span class="math inline">\(\bar{x}_1\)</span> is the mean for group 1 <br> * <span class="math inline">\(\bar{x}_2\)</span> is the mean for group 2 <br> * <span class="math inline">\(SD_1^2\)</span> is the variance (<span class="math inline">\(SD^2\)</span>) for group 1 <br> * <span class="math inline">\(SD_2^2\)</span> is the variance (<span class="math inline">\(SD^2\)</span>) for group 2 <br> * <span class="math inline">\(n_1\)</span> is the number of observations (<span class="math inline">\(N\)</span>) for group 1 <br> * <span class="math inline">\(n_2\)</span> is the number of observations (<span class="math inline">\(N\)</span>) for group 2 <br></p>
+<p>where… <br></p>
+<ul>
+<li><span class="math inline">\(\bar{x}_1\)</span> is the mean for group 1 <br></li>
+<li><span class="math inline">\(\bar{x}_2\)</span> is the mean for group 2 <br></li>
+<li><span class="math inline">\(SD_1^2\)</span> is the variance (<span class="math inline">\(SD^2\)</span>) for group 1 <br></li>
+<li><span class="math inline">\(SD_2^2\)</span> is the variance (<span class="math inline">\(SD^2\)</span>) for group 2 <br></li>
+<li><span class="math inline">\(n_1\)</span> is the number of observations (<span class="math inline">\(N\)</span>) for group 1 <br></li>
+<li><span class="math inline">\(n_2\)</span> is the number of observations (<span class="math inline">\(N\)</span>) for group 2 <br></li>
+</ul>
 <p>In addition, the degrees of freedom (<span class="math inline">\(df\)</span>) for the test is…<br> <span class="math inline">\(df = n_1 + n_2 -2\)</span> (aka <span class="math inline">\(df = N-2\)</span>)</p>
 </div>
 <div id="running-the-t-test-in-r" class="section level3">
 <h3>Running the t-Test in R</h3>
-<p>To run the t-test in R, we take the summary (output) of the analysis of variance <span style="color:blue"><code>aov</code></span> function.</p>
-<pre class="r"><code>summary(aov(data1$mpg ~ data1$am))</code></pre>
-<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-## data1$am     1  405.2   405.2   16.86 0.000285 ***
-## Residuals   30  720.9    24.0                     
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>To run the independent samples t-test in R, we take the summary (output) of the analysis of variance <span style="color:blue"><code>t.test</code></span> function.</p>
+<p>For t-test, within the <span style="color:blue"><code>t.test</code></span> function, the dependent (interval-ratio level) variable is listed first and the independent (discrete/categorical) variable is listed second.</p>
+<p>If you meet the assumptions of the t-test, you can <strong>assume equal variances</strong>, and therefore use the call <span style="color:blue"><code>var.equal=TRUE</code></span> function. If you violate the assumptions, use the call <span style="color:blue"><code>var.equal=FALSE</code></span> function.</p>
+<pre class="r"><code>t.test(data1$mpg ~ data1$am, var.equal=TRUE)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  data1$mpg by data1$am
+## t = -4.1061, df = 30, p-value = 0.000285
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -10.84837  -3.64151
+## sample estimates:
+## mean in group 0 mean in group 1 
+##        17.14737        24.39231</code></pre>
+<p>In the output above, we see the t-obtained value (-4.1061, or rather, <span class="math inline">\(\pm\)</span> 4.1061), the degrees of freedom (30), and the p-value (.000285, which is less than our set alpha level of .05).</p>
 <p>To interpret the findings, we report the following information:</p>
 <ul>
 <li>The test used</li>
-<li>If you reject or fail to reject the null hypothesis</li>
+<li>If you <strong>reject</strong> or <strong>fail to reject</strong> the null hypothesis</li>
 <li>The variables used in the analysis</li>
-<li>The degrees of freedom, calculated value of the test, and p-value
+<li>The degrees of freedom, calculated value of the test (<span class="math inline">\(t_{obtained}\)</span>), and <span class="math inline">\(p-value\)</span>
 <ul>
-<li><span class="math inline">\(t(df) = t_{obtained}, p-value\)</span></li>
+<li><span class="math inline">\(t(df) = t_{obtained}\)</span>, <span class="math inline">\(p-value\)</span></li>
 </ul></li>
 </ul>
-<p>“Using an independent samples t-test, I reject/fail to reject the null hypothesis that there is no mean difference between women’s mean beers in the fridge and men’s mean beers in the fridge, in the population, <span class="math inline">\(t(?) = ?, p ? .05\)</span>”</p>
+<p>“Using an independent samples t-test, I reject/fail to reject the null hypothesis that there is no mean difference between group 1 and group 2, in the population, <span class="math inline">\(t(?) = ?, p ? .05\)</span>”</p>
+<p>“Using an independent samples t-test, I reject the null hypothesis that there is no difference between the mean mpg of automatic and manual transmission cars, in the population, <span class="math inline">\(t(30) = \pm 4.1061, p \leq .05\)</span>”</p>
 <p><br><br><br></p>
 </div>
 </div>
