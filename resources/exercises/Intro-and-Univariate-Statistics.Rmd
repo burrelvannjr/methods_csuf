@@ -206,19 +206,11 @@ party
 ```
 
 
-To merge these objects together, we use the <span style="color:blue">`cbind`</span> (or column bind) function -- which converts the list into a column (variable), and to convert this list of columns into a data set (AKA data frame), we use the <span style="color:blue">`as.data.frame`</span> function. 
+To merge these objects together, we use the <span style="color:blue">`cbind`</span> (or column bind) function -- which converts the list into a column (variable). However, the best or more appropriate way is to merge objects into a data frame, using the <span style="color:blue">`data.frame`</span> function. 
 
 
 ```{r}
-data <- as.data.frame(
-  cbind(race,income,party)
-  )
-```
-
-... or as a single line of code...
-
-```{r}
-data <- as.data.frame(cbind(race,income,party))
+data <- data.frame(race,income,party)
 ```
 
 And the data should now be presented as a data frame:
@@ -252,7 +244,7 @@ A CSV file must be "read" into the R environment for you to use it. To do so, yo
 
 #### Working with Stock Data Sets in R
 
-Fortunately, nearly every package in R comes with a data set that R users can use. The <span style="color:blue">`MASS`</span> package, for example, comes with a great data set on car manufacturers called <span style="color:blue;background:none">`mtcars`</span>. To use this <span style="color:blue">`mtcars`</span> data set, you must call it. Calling the data will load it into your console window. To call a stock data set, just type in the name of the data set (*Note: The data set you're calling must come from a package that is already LOADED into your R session*). Because the <span style="color:blue;background:none">`MASS`</span> package is already loaded, we can call our <span style="color:blue;background:none">`mtcars`</span> data set as such...
+Fortunately, nearly every package in R comes with a data set that R users can use. *To see which stock data sets are installed in your version of R, use the function <span style="color:blue">`data()`</span>* The <span style="color:blue">`MASS`</span> package, for example, comes with a great data set on car manufacturers called <span style="color:blue;background:none">`mtcars`</span>. To use this <span style="color:blue">`mtcars`</span> data set, you must call it. Calling the data will load it into your console window. To call a stock data set, just type in the name of the data set (*Note: The data set you're calling must come from a package that is already LOADED into your R session*). Because the <span style="color:blue;background:none">`MASS`</span> package is already loaded, we can call our <span style="color:blue;background:none">`mtcars`</span> data set as such...
 
 ```{r}
 mtcars
