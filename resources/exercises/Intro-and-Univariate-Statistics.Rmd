@@ -180,11 +180,57 @@ se<-((sd)/(sqrt(n)))
 list((mean-(z*se)),(mean+(z*se)))
 ```
 
+In addition, you can use the <span style="color:blue">`c`</span> or concatenate function to manually input **columns** of data (variables) and merge them into one data frame.
+
+Let's say someone sent you the following image:
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("data_image.png")
+```
+
+
+We could insert the data, one variable at a time, each as a new list object:
+
+```{r}
+race <- c("black","white","latinx","white","latinx","black","other")
+income <- c(57000,85500,88000,43000,45000,91500,79000)
+party <- c("democrat","democrat","independent","republican","democrat","democrat","independent")
+```
+
+Next, we can view the lists by calling the object names:
+
+```{r}
+race
+income
+party
+```
+
+
+To merge these objects together, we use the <span style="color:blue">`cbind`</span> (or column bind) function -- which converts the list into a column (variable), and to convert this list of columns into a data set (AKA data frame), we use the <span style="color:blue">`as.data.frame`</span> function. 
+
+
+```{r}
+data <- as.data.frame(
+  cbind(race,income,party)
+  )
+```
+
+... or as a single line of code...
+
+```{r}
+data <- as.data.frame(cbind(race,income,party))
+```
+
+And the data should now be presented as a data frame:
+
+```{r}
+data
+```
 
 #
 
 
-#### Removing Objects from your Enviornment
+#### Removing Objects from your Environment
 
 Many times, we'll be working with several objects, and ultimately decide that some of them are no longer needed. In this case, we would want to tidy up our environment by removing an object. To do so, we must use the <span style="color:blue">`rm`</span> function. You can do it like this, changing the word "OBJECT" to the name of the object that you're trying to remove from the R environment: <span style="color:blue">`rm(OBJECT)`</span>. 
 
