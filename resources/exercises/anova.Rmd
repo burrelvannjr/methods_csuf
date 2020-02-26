@@ -1,5 +1,5 @@
 ---
-title: "T-test"
+title: "Analysis of Variance"
 #author: "Burrel Vann Jr"
 output: 
   html_document: 
