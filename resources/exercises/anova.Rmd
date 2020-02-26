@@ -11,11 +11,12 @@ output:
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
 * [**t-Test**](t-test.html)
+* [**Analysis of Variance (ANOVA)**](anova.html)
 
 
-### What is the t-Test?
+### What is the Analysis of Variance (ANOVA)?
 
-The t-test examines the differences in means between **two** groups, in effort to see if the differences reflect true differences that we could expect to find in the population. 
+The ANOVA test examines the differences in means between **three or more** groups, in effort to see if the differences reflect true differences that we could expect to find in the population. The resulting test calculates an F value.  
 
 
 
@@ -35,9 +36,9 @@ library(mosaic)
 
 #
 
-#### Assumptions and Diagnostics for the t-Test
+#### Assumptions and Diagnostics for the ANOVA
 
-The assumptions for a t-test are...
+The assumptions for an ANOVA are...
 
 * Independence of Observations
 * Equal Sample Sizes
@@ -74,10 +75,10 @@ describeBy(data1$mpg, data1$am)
 
 ##### Histogram
 
-Plot the histogram for mpg (Y variable) broken out by manual transmission (levels of the X variable)...  
+Plot the histogram for mpg (Y variable) broken out by number of cylinders in a car (levels of the X variable)...  
 
 ```{r}
-histogram(~ mpg | factor(am), data = data1, type = "count", main = "Histogram of 'Miles per Gallon' by 'Manual Transmission'")
+histogram(~ mpg | factor(cyl), data = data1, type = "count", main = "Histogram of 'Miles per Gallon' by 'Number of Cylinders'")
 ```
 
 #
@@ -85,7 +86,7 @@ histogram(~ mpg | factor(am), data = data1, type = "count", main = "Histogram of
 ...next, overlay a normal curve...
 
 ```{r}
-histogram(~ mpg | factor(am), data = data1, main = "Histogram of 'Miles per Gallon' by 'Manual Transmission Type'", 
+histogram(~ mpg | factor(cyl), data = data1, main = "Histogram of 'Miles per Gallon' by 'Number of Cylinders'", 
           type = "density", 
           panel=function(x, ...) {
             panel.histogram(x, ...)
@@ -116,11 +117,11 @@ To tell if a variable is normally-distrubted using the box-and-whisker plot, gen
 #
 
 
-To plot a boxplot, broken out by *Manual Transmission*, we can do the following...
+To plot a boxplot, broken out by *Number of Cylinders in a Car*, we can do the following...
 
 
 ```{r}
-bwplot(~mpg | factor(am), data = data1, pch="|", main = "Bar-and-Whisker Plot of 'mpg' by 'Manual Transmission Type'")
+bwplot(~mpg | factor(cyl), data = data1, pch="|", main = "Bar-and-Whisker Plot of 'Miles per Gallon' by 'Number of Cylinders'")
 ```
 
 
@@ -131,11 +132,11 @@ The quantile-quantile plot is a visual tool to help us figure out if the empiric
 We assess normality an break this plot out by a grouping variable. 
 
 ```{r}
-xqqmath(~mpg | factor(am), data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Wr.Hnd' by 'Manual Transmission Type'", xlab = "Expected Normal")
+xqqmath(~mpg | factor(cyl), data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Miles per Gallon' by 'Number of Cylinders'", xlab = "Expected Normal")
 ```
 
 
-### The t-Test
+### The ANOVA (F-Test)
 
 The calculation for the t-Test is:
 
@@ -154,18 +155,18 @@ In addition, the degrees of freedom ($df$) for the test is...<br>
 $df = n_1 + n_2 -2$ (aka $df = N-2$)
 
 
-### Running the t-Test in R
+### Running the ANOVA in R
 
 
-To run the independent samples t-test in R, we take the summary (output) of the analysis of variance <span style="color:blue">`t.test`</span> function.
+To run the one-way ANOVA in R, we take the summary (output) of the analysis of variance <span style="color:blue">`aov`</span> function.
 
-For t-test, within the <span style="color:blue">`t.test`</span> function, the dependent (interval-ratio level) variable is listed first and the independent (discrete/categorical) variable is listed second. 
+For the ANOVA, within the <span style="color:blue">`aov`</span> function, the dependent (interval-ratio level) variable is listed first and the independent (discrete/categorical) variable is listed second, separated by a tilde <span style="color:blue">`~`</span>. 
 
-If you meet the assumptions of the t-test, you can **assume equal variances**, and therefore use the call <span style="color:blue">`var.equal=TRUE`</span> function. If you violate the assumptions, use the call <span style="color:blue">`var.equal=FALSE`</span> function.
+If you meet the assumptions of the analysis of variance, you can **assume equal variances**, and therefore use the call <span style="color:blue">`var.equal=TRUE`</span> function. If you violate the assumptions, use the call <span style="color:blue">`var.equal=FALSE`</span> function.
 
 
 ```{r}
-t.test(data1$mpg ~ data1$am, var.equal=TRUE)
+summary(aov(data1$mpg ~ data1$cyl))
 ```
 
 In the output above, we see the t-obtained value (-4.1061, or rather, $\pm$ 4.1061), the degrees of freedom (30), and the p-value (.000285, which is less than our set alpha level of .05).
