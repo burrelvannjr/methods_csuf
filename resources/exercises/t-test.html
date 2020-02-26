@@ -385,6 +385,7 @@ summary {
 <ul>
 <li><a href="Intro-and-Univariate-Statistics.html"><strong>Intro to R</strong></a></li>
 <li><a href="t-test.html"><strong>t-Test</strong></a></li>
+<li><a href="anova.html"><strong>Analysis of Variance (ANOVA)</strong></a></li>
 </ul>
 </div>
 <div id="what-is-the-t-test" class="section level3">
@@ -515,7 +516,7 @@ summary {
 </div>
 <div id="running-the-t-test-in-r" class="section level3">
 <h3>Running the t-Test in R</h3>
-<p>To run the independent samples t-test in R, we take the summary (output) of the analysis of variance <span style="color:blue"><code>t.test</code></span> function.</p>
+<p>To run the independent samples t-test in R, we use the <span style="color:blue"><code>t.test</code></span> function.</p>
 <p>For t-test, within the <span style="color:blue"><code>t.test</code></span> function, the dependent (interval-ratio level) variable is listed first and the independent (discrete/categorical) variable is listed second.</p>
 <p>If you meet the assumptions of the t-test, you can <strong>assume equal variances</strong>, and therefore use the call <span style="color:blue"><code>var.equal=TRUE</code></span> function. If you violate the assumptions, use the call <span style="color:blue"><code>var.equal=FALSE</code></span> function.</p>
 <pre class="r"><code>t.test(data1$mpg ~ data1$am, var.equal=TRUE)</code></pre>

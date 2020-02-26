@@ -11,6 +11,7 @@ output:
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
 * [**t-Test**](t-test.html)
+* [**Analysis of Variance (ANOVA)**](anova.html)
 
 
 ### What is the t-Test?
@@ -157,7 +158,7 @@ $df = n_1 + n_2 -2$ (aka $df = N-2$)
 ### Running the t-Test in R
 
 
-To run the independent samples t-test in R, we take the summary (output) of the analysis of variance <span style="color:blue">`t.test`</span> function.
+To run the independent samples t-test in R, we use the <span style="color:blue">`t.test`</span> function.
 
 For t-test, within the <span style="color:blue">`t.test`</span> function, the dependent (interval-ratio level) variable is listed first and the independent (discrete/categorical) variable is listed second. 
 
