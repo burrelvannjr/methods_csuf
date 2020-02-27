@@ -9,7 +9,7 @@ output:
 ###### Navigation
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
-* [**t-Test**](t-test.html)
+* [**t-Test**](t-test.html) [[*t-Test example*]](t-test example.html)
 * [**Analysis of Variance (ANOVA)**](anova.html)
 
 
@@ -155,7 +155,7 @@ x
 
 #### Creating a List as an Object
 
-Sometimes, for quick analyses, you may need to read in a list of numbers (in your working Environment). To read in a list, you use the concatenate <span style="color:blue">`c`</span> function. You can create a list by replaceing the word "LIST" from this with the actual list: <span style="color:blue">`c(OBJECT)`</span>. 
+Sometimes, for quick analyses, you may need to read in a list of numbers (in your working Environment). To read in a list, you use the concatenate <span style="color:blue">`c`</span> function. You can create a list by replacing the word "LIST" from this with the actual list: <span style="color:blue">`c(LIST)`</span>. 
 
 To create an object out of a list of numbers, we could do the following...
 

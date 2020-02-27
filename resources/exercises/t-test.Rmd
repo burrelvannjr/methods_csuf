@@ -10,7 +10,7 @@ output:
 ###### Navigation
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
-* [**t-Test**](t-test.html)
+* [**t-Test**](t-test.html) [[**t-Test example**]](t-test example.html)
 * [**Analysis of Variance (ANOVA)**](anova.html)
 
 
@@ -50,30 +50,28 @@ data1 <- mtcars
 ```
 
 
-##### Independence of Observations (Examine Data Collection Strategy)
-* Groups are not related or dependent upon each other. Case can’t be in more than one group. No ties between observations.
+##### 1. Independence of Observations (Examine Data Collection Strategy)
+* Groups are not related or dependent upon each other. Case can’t be in more than one group. No ties between observations. Examine data collection strategy to see if there are linkages between observations. 
 
-Examine data collection strategy to see if there are linkages between observations. 
-
-##### Equal Sample Sizes (Examine N for each group)
+##### 2. Equal Sample Sizes (Examine N for each group)
 * The number of cases in each group should be relatively similar. (If not, use pooled variance/unequal variances asssume t-test formula)
 
-##### Homogeneity of Variance (Examine SD^2^ for each group)
+##### 3. Homogeneity of Variance (Examine SD^2^ for each group)
 * Both groups have approximately equal variances (SD^2^). The distributions (or spread) for the groups are approximately equal. Keppel & Zedeck (1989) suggest that variance comparison should not exceed 10:1 ratio (*or... alternatively, the SDs, when compared, should not exceed around a 3:1 ratio*). 
 
-For both of the above assumptions, we can examine the univariate data table, broken out by group:
+For both of the above (2 and 3) assumptions, we can examine the univariate data table, broken out by group:
 
 ```{r}
 describeBy(data1$mpg, data1$am)
 ```
 
 
-##### Normality (Examine Plots: Histogram, Q-Q Normality Plots, Box-and-Whiskers Plots)
+##### 4. Normality (Examine Plots: Histogram, Q-Q Normality Plots, Box-and-Whiskers Plots)
 * Distribution must be relatively normal. (If violated, use “unequal variances assumed” formula, otherwise, use “equal variances assumed”)
 
 
 
-##### Histogram
+##### 4a. Histogram
 
 Plot the histogram for mpg (Y variable) broken out by manual transmission (levels of the X variable)...  
 
@@ -98,7 +96,7 @@ histogram(~ mpg | factor(am), data = data1, main = "Histogram of 'Miles per Gall
 ```
 
 
-##### Boxplots (Box-and-Whisker Plots)
+##### 4b. Boxplots (Box-and-Whisker Plots)
 
 Boxplots also provide a visual representation of the normality of a distribution. The boxplot has a box, a line through the box, two whiskers on either end of the box, and sometimes dots/points outside the whiskers. Below, we get a sense of what each part of the boxplot represents...
 
@@ -125,7 +123,7 @@ bwplot(~mpg | factor(am), data = data1, pch="|", main = "Bar-and-Whisker Plot of
 ```
 
 
-##### Normal Q-Q (Quantile-Quantile) Plots
+##### 4c. Normal Q-Q (Quantile-Quantile) Plots
 
 The quantile-quantile plot is a visual tool to help us figure out if the empirical distribution of our variable fits (or rather, comes from) a theoretical normal distribution.
 
@@ -162,7 +160,7 @@ To run the independent samples t-test in R, we use the <span style="color:blue">
 
 For t-test, within the <span style="color:blue">`t.test`</span> function, the dependent (interval-ratio level) variable is listed first and the independent (discrete/categorical) variable is listed second. 
 
-If you meet the assumptions of the t-test, you can **assume equal variances**, and therefore use the call <span style="color:blue">`var.equal=TRUE`</span> function. If you violate the assumptions, use the call <span style="color:blue">`var.equal=FALSE`</span> function.
+If you meet the assumptions of the t-test, you can **assume equal variances**, and therefore use the call <span style="color:blue">`var.equal=TRUE`</span>. If you violate the assumptions, use the call <span style="color:blue">`var.equal=FALSE`</span>.
 
 
 ```{r}
