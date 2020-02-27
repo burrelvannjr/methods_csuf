@@ -1,5 +1,5 @@
 ---
-title: "T-test"
+title: "Example T-test Walkthrough"
 #author: "Burrel Vann Jr"
 output: 
   html_document: 
@@ -10,7 +10,7 @@ output:
 ###### Navigation
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
-* [**t-Test**](t-test.html) [[*t-Test example*]](t-test example.html)
+* [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
 * [**Analysis of Variance (ANOVA)**](anova.html)
 
 
