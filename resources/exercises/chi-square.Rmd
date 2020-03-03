@@ -1,0 +1,123 @@
+---
+title: "T-test"
+#author: "Burrel Vann Jr"
+output: 
+  html_document: 
+    css: markdown3.css
+---
+
+
+###### Navigation
+
+* [**Intro to R**](Intro-and-Univariate-Statistics.html)
+* [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
+* [**Analysis of Variance (ANOVA)**](anova.html)
+* [**Chi Square**](chi-square.html) 
+
+
+### What is the Chi Square Test of Independence?
+
+The Chi Square test ($X^2$) examines the association or relationship between two nominal/ordinal variables to see if the relationship reflects a true relationship that we could expect to find in the population. The test also tells us whether or not a category (attribute) of one variable varies by categories of another variable. 
+
+The test is called the *test of independence* because it really tests the absence of association between (independence of) two variables.
+
+
+
+
+
+```{r, echo=F}
+options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
+```
+
+# 
+
+
+```{r, results="hide", warning=FALSE, message=FALSE, echo=FALSE}
+library(MASS)
+library(psych)
+library(lattice)
+library(mosaic)
+```
+
+#
+
+#### Assumptions and Diagnostics for the t-Test
+
+The assumptions for a t-test are...
+
+* Independence of Observations
+* Normality
+
+```{r, echo=FALSE}
+data1 <- mtcars
+```
+
+
+##### 1. Independence of Observations (Examine Data Collection Strategy)
+* Cases (observations) are not related or dependent upon each other. Case can’t have more than one attribute. No ties between observations. Examine data collection strategy to see if there are linkages between observations. 
+
+
+##### 2. Normality (Examine Crosstab)
+
+
+* Distributions must be relatively normal. A good way to see if we meet the normality assumption is to look at the **Expected Frequencies** in each cell of the crosstab. **If 20 percent or more of our Expected Frequencies across all the cells are less than 5 cases ($E \lt 5$), then you violate the assumption of normality**.
+
+
+
+##### 2a. Crosstab
+
+Usually list the independent variable first and the dependent variable second
+
+
+```{r}
+table(data1$vs, data1$am)
+```
+
+#
+### The Chi Square Test Calculation
+
+The calculation for the Chi Square is:
+
+ $\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{SD_1^2}{n_1}+\frac{SD_2^2}{n_2}}}$
+ 
+where... <br>
+
+* $\bar{x}_1$ is the mean for group 1 <br>
+* $\bar{x}_2$ is the mean for group 2 <br>
+* $SD_1^2$ is the variance ($SD^2$) for group 1 <br>
+* $SD_2^2$ is the variance ($SD^2$) for group 2 <br>
+* $n_1$ is the number of observations ($N$) for group 1 <br>
+* $n_2$ is the number of observations ($N$) for group 2 <br>
+
+In addition, the degrees of freedom ($df$) for the test is...<br> 
+$df = n_1 + n_2 -2$ (aka $df = N-2$)
+
+
+### Running the Chi Square Test
+
+
+
+For Chi Square, within the <span style="color:blue">`chi.sq`</span> function, the dependent variable is listed first and the independent variable is listed second. 
+
+
+
+```{r}
+chisq.test(data1$vs, data1$am, correct=FALSE)
+```
+
+In the output above, we see the $X^2$-obtained value (0.90688), the degrees of freedom (30), and the p-value (0.3409, which is greater than our set alpha level of .05).
+
+To interpret the findings, we report the following information:
+
+* The test used
+* If you **reject** or **fail to reject** the null hypothesis
+* The variables used in the analysis
+* The degrees of freedom, calculated value of the test ($X^2_{obtained}$), and $p-value$
+  + $X^2(df) = X^2_{obtained}$, $p-value$
+
+“Using an independent samples $X^2$, I reject/fail to reject the null hypothesis that there is no association between variable one and variable 2, in the population, $X^2(?) = ?, p ? .05$” 
+
+“Using an independent samples $X^$, I reject the null hypothesis that there is no association between the shape and the transmission type of cars, in the population, $X^2(1) = .90688, p \gt .05$” 
+
+
+<br><br><br>
