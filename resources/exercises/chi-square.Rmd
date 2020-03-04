@@ -1,5 +1,5 @@
 ---
-title: "T-test"
+title: "Chi-Square Test of Independence"
 #author: "Burrel Vann Jr"
 output: 
   html_document: 
@@ -41,9 +41,9 @@ library(mosaic)
 
 #
 
-#### Assumptions and Diagnostics for the t-Test
+#### Assumptions and Diagnostics for Chi Square
 
-The assumptions for a t-test are...
+The assumptions for the Chi Square are...
 
 * Independence of Observations
 * Normality
@@ -57,19 +57,15 @@ data1 <- mtcars
 * Cases (observations) are not related or dependent upon each other. Case can’t have more than one attribute. No ties between observations. Examine data collection strategy to see if there are linkages between observations. 
 
 
-##### 2. Normality (Examine Crosstab)
+##### 2. Normality (Examine Crosstabs for Expected Frequencies)
 
 
 * Distributions must be relatively normal. A good way to see if we meet the normality assumption is to look at the **Expected Frequencies** in each cell of the crosstab. **If 20 percent or more of our Expected Frequencies across all the cells are less than 5 cases ($E \lt 5$), then you violate the assumption of normality**.
 
+*The Chi Square test is finicky, in that you cannot see the expected frequencies (and observed frequencies) until you run the Chi Square function (see below)*
 
 
-##### 2a. Crosstab
-
-Usually list the independent variable first and the dependent variable second
-
-
-```{r}
+```{r, results="hide", echo=FALSE}
 table(data1$vs, data1$am)
 ```
 
@@ -78,19 +74,25 @@ table(data1$vs, data1$am)
 
 The calculation for the Chi Square is:
 
- $\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{SD_1^2}{n_1}+\frac{SD_2^2}{n_2}}}$
+ $X^2 = \sum \frac{(f_o - f_e)^2}{f_e}$ or
+ $X^2 = \sum \frac{(f_{o_i} - f_{e_i})^2}{f_{e_i}}$
  
 where... <br>
 
-* $\bar{x}_1$ is the mean for group 1 <br>
-* $\bar{x}_2$ is the mean for group 2 <br>
-* $SD_1^2$ is the variance ($SD^2$) for group 1 <br>
-* $SD_2^2$ is the variance ($SD^2$) for group 2 <br>
-* $n_1$ is the number of observations ($N$) for group 1 <br>
-* $n_2$ is the number of observations ($N$) for group 2 <br>
+* $f_o$ (or $f_{o_i}$) is the observed frequency for that cell (the $i^{th}$cell)<br>
+* $f_e$ (or $f_{e_i}$) is the expected frequency for that cell (the $i^{th}$cell)<br>
+  + $f_e$ (or $f_{e_i}$) for each cell is calculated by the following:
+    + $f_e$ (or $f_{e_i}$) $= \frac{(r_{total_i})(c_{total_i})}{total}$ $= \frac{(n_{row_i})(n_{column_i})}{N}$
+
 
 In addition, the degrees of freedom ($df$) for the test is...<br> 
-$df = n_1 + n_2 -2$ (aka $df = N-2$)
+* $df = (r-1)(c-1)$
+
+where...
+
+* $r$ is the number of rows in a crosstabulation<br>
+* $c$ is the number of columns in a crosstabulation<br>
+
 
 
 ### Running the Chi Square Test
@@ -115,9 +117,29 @@ To interpret the findings, we report the following information:
 * The degrees of freedom, calculated value of the test ($X^2_{obtained}$), and $p-value$
   + $X^2(df) = X^2_{obtained}$, $p-value$
 
-“Using an independent samples $X^2$, I reject/fail to reject the null hypothesis that there is no association between variable one and variable 2, in the population, $X^2(?) = ?, p ? .05$” 
+“Using the Chi Square test of independence ($X^2$), I reject/fail to reject the null hypothesis that there is no association between variable one and variable 2, in the population, $X^2(?) = ?, p ? .05$” 
 
-“Using an independent samples $X^$, I reject the null hypothesis that there is no association between the shape and the transmission type of cars, in the population, $X^2(1) = .90688, p \gt .05$” 
+“Using the Chi Square test of independence ($X^2$), I reject the null hypothesis that there is no association between the shape and the transmission type of cars, in the population, $X^2(1) = .90688, p \gt .05$” 
 
+
+##### Back to the Normality Assumption
+
+To check if you've met the assumption of normality (e.g. fewer than 20% of cells in the crosstab of expected frequencies falls below $n=5$), you have to make the chi square function (<span style="color:blue">`chi.sq`</span>) into an object... as such... 
+
+```{r}
+x2 <- chisq.test(data1$vs, data1$am, correct=FALSE)
+```
+
+and because the actual test is now an object, you can call it's component variables by using the object name, the dollar sign operator (<span style="color:blue">`$`</span>), and the variable named **expected** (you can also call the variable named **observed**) to get a crosstab of each. 
+
+```{r}
+x2$observed
+```
+
+```{r}
+x2$expected
+```
+
+We see here that we have met the assumption of normality: fewer than 20% of cells in the 4x4 table have less than 5 expected counts (actually, no cell has fewer than 5).
 
 <br><br><br>
