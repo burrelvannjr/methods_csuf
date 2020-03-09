@@ -12,6 +12,7 @@ output:
 * [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
 * [**Analysis of Variance (ANOVA)**](anova.html)
 * [**Chi Square**](chi-square.html) 
+* [**Correlation**](correlation.html) 
 
 
 ### What is R?

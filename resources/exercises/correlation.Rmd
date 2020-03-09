@@ -1,0 +1,179 @@
+---
+title: "Correlation (Pearson's Product Moment Correlation Coefficient)"
+#author: "Burrel Vann Jr"
+output: 
+  html_document: 
+    css: markdown3.css
+---
+
+
+###### Navigation
+
+* [**Intro to R**](Intro-and-Univariate-Statistics.html)
+* [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
+* [**Analysis of Variance (ANOVA)**](anova.html)
+* [**Chi Square**](chi-square.html) 
+* [**Correlation**](correlation.html) 
+
+
+### What is the correlation?
+
+The correlation ($r$) or Pearson's product-moment correlation coefficient examines the association or relationship between two interval-ratio variables to see if the relationship reflects a true relationship that we could expect to find in the population. The test also tells us the **strength** (weak, moderate, strong) and **direction** (positive, negative) of that relationship. Rarely, we will see a non-relationship or a perfect relationship.
+
+
+
+
+
+```{r, echo=F}
+options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
+```
+
+# 
+
+
+```{r, results="hide", warning=FALSE, message=FALSE, echo=FALSE}
+library(MASS)
+library(psych)
+library(lattice)
+library(mosaic)
+```
+
+#
+
+#### Assumptions and Diagnostics for Correlation
+
+The assumptions for the Correlation are...
+
+* Linearity
+* Normality
+* Absence of Range Restrictions
+* Absence of Heterogeneous Subsamples
+
+In addition, the previously-discussed assumptions for other tests (independence of observations) is implied, since all of these bivariate tests require random samples.
+
+```{r, echo=FALSE}
+data1 <- mtcars
+```
+
+
+##### 1. Linearity
+* Variables move together in a linear fashion.
+  + Visual inspection of **scatterplot** to see if relationship is linear (straight-line)
+
+```{r, echo=FALSE}
+plot(data1$wt, data1$mpg)
+abline(lm(data1$mpg~data1$wt), col="Blue") # regression line (y~x))
+```
+
+
+##### 2. Normality 
+
+* Distributions must be relatively normal.
+  + Visual inspection of...
+    + scatterplot
+    + Histograms for each variable
+    + Normality (Q-Q) plot for each variable
+    + Box-and-Whiskers plot for each variable
+
+Histogram
+
+```{r}
+histogram(~ mpg, data = data1, main = "Histogram of 'Miles per Gallon'", 
+          type = "density", 
+          panel=function(x, ...) {
+            panel.histogram(x, ...)
+            panel.abline(v=mean(x, na.rm = TRUE),col="red")
+            panel.mathdensity(dmath=dnorm, col="black", 
+                              args=list(mean=mean(x, na.rm = TRUE),
+                                        sd=sd(x, na.rm = TRUE)), ...)            
+          }) 
+```
+
+```{r}
+histogram(~ wt, data = data1, main = "Histogram of 'Weight'", 
+          type = "density", 
+          panel=function(x, ...) {
+            panel.histogram(x, ...)
+            panel.abline(v=mean(x, na.rm = TRUE),col="red")
+            panel.mathdensity(dmath=dnorm, col="black", 
+                              args=list(mean=mean(x, na.rm = TRUE),
+                                        sd=sd(x, na.rm = TRUE)), ...)            
+          }) 
+```
+
+Normality (Q-Q) Plots
+
+```{r}
+xqqmath(~ mpg, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Wr.Hnd'", xlab = "Expected Normal")
+```
+
+```{r}
+xqqmath(~ wt, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Wr.Hnd'", xlab = "Expected Normal")
+```
+
+Box-and-Whisker Plots
+
+```{r}
+bwplot(~ mpg, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'Miles per Gallon'")
+```
+
+```{r}
+bwplot(~ wt, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'Weight'")
+```
+
+##### 3. Absence of Range Restrictions
+* Values on variables cannot be restricted to small range
+  + Examine range for variables
+
+##### 4. Absence of Heterogeneous Subsamples
+* Not having groups that have extremely different values (e.g. for which a t-test/ANOVA might appropriately identify)
+  + Examine means for various groups in the sample
+
+
+
+```{r, results="hide", echo=FALSE}
+table(data1$vs, data1$am)
+```
+
+#
+### The Correlation Test Calculation
+
+The calculation for the Chi Square is:
+
+ $r = \frac{\sum (X - \bar{X})(Y - \bar{Y})}{\sqrt{\sum (X - \bar{X})^2 \sum(Y - \bar{Y})^2}}$
+ 
+
+
+In addition, the degrees of freedom ($df$) for the test is...<br> 
+* $df = N - 2$
+
+
+### Running the Correlation
+
+
+
+For Chi Square, within the <span style="color:blue">`cor.test`</span> function, the independent variable is listed first and the dependent variable is listed second. 
+
+
+
+```{r}
+cor.test(data1$wt, data1$mpg)
+```
+
+In the output above, we see the $r$-obtained value (-.8676594), the degrees of freedom (30), and the p-value (1.294 x $10^{-10}$ = .0000000001294), which is much less than our set alpha level of .05).
+
+To interpret the findings, we report the following information:
+
+* The test used
+* If you **reject** or **fail to reject** the null hypothesis
+* The variables used in the analysis
+* The degrees of freedom, calculated value of the test ($X^2_{obtained}$), and $p-value$
+  + $r(df) = r_{obtained}$, $p-value$
+
+“Using the Pearson's correlation test ($r$), I reject/fail to reject the null hypothesis that there is no association between variable one and variable 2, in the population, $r(?) = ?, p ? .05$” 
+
+“Using the Pearson's correlation test ($r$), I reject the null hypothesis that there is no association between the weight of a car and it's fuel economy in terms of miles per gallon, in the population, $r = -.8676594, p \lt .05$. In particular, we have a *strong* *negative* relationship between car weight and car mpg, such that, as the weight of the car increases, the miles-per-gallon decreases.” 
+
+
+
+<br><br><br>
