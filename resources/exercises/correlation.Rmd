@@ -104,11 +104,11 @@ histogram(~ wt, data = data1, main = "Histogram of 'Weight'",
 Normality (Q-Q) Plots
 
 ```{r}
-xqqmath(~ mpg, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Wr.Hnd'", xlab = "Expected Normal")
+xqqmath(~ mpg, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'mpg'", xlab = "Expected Normal")
 ```
 
 ```{r}
-xqqmath(~ wt, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Wr.Hnd'", xlab = "Expected Normal")
+xqqmath(~ wt, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'wt'", xlab = "Expected Normal")
 ```
 
 Box-and-Whisker Plots
