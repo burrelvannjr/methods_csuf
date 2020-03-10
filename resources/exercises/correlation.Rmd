@@ -60,7 +60,7 @@ data1 <- mtcars
 * Variables move together in a linear fashion.
   + Visual inspection of **scatterplot** to see if relationship is linear (straight-line)
 
-```{r, echo=FALSE}
+```{r}
 plot(data1$wt, data1$mpg)
 abline(lm(data1$mpg~data1$wt), col="Blue") # regression line (y~x))
 ```
