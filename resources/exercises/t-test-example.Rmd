@@ -11,9 +11,9 @@ output:
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
 * [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
-* [**Analysis of Variance (ANOVA)**](anova.html)
-* [**Chi Square**](chi-square.html) 
-* [**Correlation**](correlation.html) 
+* [**Analysis of Variance (ANOVA)**](anova.html) [[*n/a*]](anova-example.html)
+* [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
+* [**Correlation**](correlation.html) [[*n/a*]](correlation-example.html)
 
 
 ### Is there a mean difference in the number of beers undergraduate students versus graduate students have in their home refrigerator?
@@ -224,7 +224,7 @@ To interpret the findings, we report the following information:
 
 “Using an independent samples t-test, I reject/fail to reject the null hypothesis that there is no mean difference between group 1 and group 2, in the population, $t(?) = ?, p ? .05$” 
 
-“Using an independent samples t-test, I fail to reject the null hypothesis that there is no difference between the mean number of beers for undergraduate students and graduate students, in the population, $t(18) = \pm 1.5518, p > .05$” 
+* <span style="color:red">“Using an independent samples t-test, I fail to reject the null hypothesis that there is no difference between the mean number of beers for undergraduate students and graduate students, in the population, $t(18) = \pm 1.5518, p > .05$.”</span>
 
 
 <br><br><br>

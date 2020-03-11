@@ -11,9 +11,9 @@ output:
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
 * [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
-* [**Analysis of Variance (ANOVA)**](anova.html)
-* [**Chi Square**](chi-square.html) 
-* [**Correlation**](correlation.html) 
+* [**Analysis of Variance (ANOVA)**](anova.html) [[*n/a*]](anova-example.html)
+* [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
+* [**Correlation**](correlation.html) [[*n/a*]](correlation-example.html)
 
 
 ### What is the correlation?
@@ -186,7 +186,7 @@ To interpret the findings, we report the following information:
 
 “Using the Pearson's correlation test ($r$), I reject/fail to reject the null hypothesis that there is no association between variable one and variable 2, in the population, $r(?) = ?, p ? .05$” 
 
-“Using the Pearson's correlation test ($r$), I reject the null hypothesis that there is no association between the weight of a car and it's fuel economy in terms of miles per gallon, in the population, $r = -.8676594, p \lt .05$. In particular, we have a *strong* *negative* relationship between car weight and car mpg, such that, as the weight of the car increases, the miles-per-gallon decreases.” 
+“Using the Pearson's correlation test ($r$), I reject the null hypothesis that there is no association between the weight of a car and its fuel economy in terms of miles per gallon, in the population, $r = -.8676594, p \lt .05$. In particular, we have a *strong* *negative* relationship between car weight and car mpg, such that, as the weight of the car increases, the miles-per-gallon decreases.” 
 
 
 

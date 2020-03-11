@@ -11,9 +11,9 @@ output:
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
 * [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
-* [**Analysis of Variance (ANOVA)**](anova.html)
-* [**Chi Square**](chi-square.html) 
-* [**Correlation**](correlation.html) 
+* [**Analysis of Variance (ANOVA)**](anova.html) [[*n/a*]](anova-example.html)
+* [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
+* [**Correlation**](correlation.html) [[*n/a*]](correlation-example.html)
 
 
 ### What is the t-Test?
