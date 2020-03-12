@@ -31,7 +31,7 @@ options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
 # 
 
 
-```{r, results="hide", warning=FALSE, message=FALSE, echo=FALSE}
+```{r, results="hide", warning=FALSE, message=FALSE}
 library(MASS)
 library(psych)
 library(lattice)
@@ -51,7 +51,7 @@ The assumptions for the Correlation are...
 
 In addition, the previously-discussed assumptions for other tests (independence of observations) is implied, since all of these bivariate tests require random samples.
 
-```{r, echo=FALSE}
+```{r}
 data1 <- mtcars
 ```
 
