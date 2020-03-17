@@ -30,14 +30,6 @@ options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
 
 # 
 
-
-```{r, results="hide", warning=FALSE, message=FALSE}
-library(MASS)
-library(psych)
-library(lattice)
-library(mosaic)
-```
-
 #
 
 #### Assumptions and Diagnostics for Correlation
@@ -50,6 +42,14 @@ The assumptions for the Correlation are...
 * Absence of Heterogeneous Subsamples
 
 In addition, the previously-discussed assumptions for other tests (independence of observations) is implied, since all of these bivariate tests require random samples.
+
+```{r, results="hide", warning=FALSE, message=FALSE}
+library(MASS)
+library(psych)
+library(lattice)
+library(mosaic)
+```
+
 
 ```{r}
 data1 <- mtcars
@@ -80,12 +80,12 @@ abline(lm(data1$mpg~data1$wt), col="Blue") # regression line (y~x))
 
 * Distributions must be relatively normal.
   + Visual inspection of...
-    + scatterplot
+    + Scatterplot
     + Histograms for each variable
-    + Normality (Q-Q) plot for each variable
     + Box-and-Whiskers plot for each variable
+    + Normality (Q-Q) plot for each variable
 
-Histogram
+##### 2a. Histogram
 
 ```{r}
 histogram(~ mpg, data = data1, main = "Histogram of 'Miles per Gallon'", 
@@ -111,7 +111,18 @@ histogram(~ wt, data = data1, main = "Histogram of 'Weight'",
           }) 
 ```
 
-Normality (Q-Q) Plots
+##### 2b. Box-and-Whisker Plots
+
+```{r}
+bwplot(~ mpg, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'Miles per Gallon'")
+```
+
+```{r}
+bwplot(~ wt, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'Weight'")
+```
+
+
+##### 2c. Normality (Q-Q) Plots
 
 ```{r}
 xqqmath(~ mpg, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Miles per Gallon'", xlab = "Expected Normal")
@@ -121,15 +132,6 @@ xqqmath(~ mpg, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Miles per
 xqqmath(~ wt, data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Weight'", xlab = "Expected Normal")
 ```
 
-Box-and-Whisker Plots
-
-```{r}
-bwplot(~ mpg, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'Miles per Gallon'")
-```
-
-```{r}
-bwplot(~ wt, data = data1, pch="|", main = "Bar-and-Whisker Plot of 'Weight'")
-```
 
 ##### 3. Absence of Range Restrictions
 * Values on variables cannot be restricted to small range

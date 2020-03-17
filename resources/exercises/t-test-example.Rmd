@@ -13,7 +13,7 @@ output:
 * [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
 * [**Analysis of Variance (ANOVA)**](anova.html) [[*n/a*]](anova-example.html)
 * [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
-* [**Correlation**](correlation.html) [[*n/a*]](correlation-example.html)
+* [**Correlation**](correlation.html) [[*Correlation example*]](correlation-example.html)
 
 
 ### Is there a mean difference in the number of beers undergraduate students versus graduate students have in their home refrigerator?
@@ -160,7 +160,7 @@ To plot a boxplot of *Beers*, broken out by *Student Type*, we can do the follow
 bwplot(~ beers | factor(level), data = data, pch="|", main = "Bar-and-Whisker Plot of 'Beers' by 'Student Type'")
 ```
 
-  + <span style="color:red">We can see from the boxplot that for both group distributions of the outcome variable (beers), the data are moderately only somewhat normally distributed. For both grads and undergrads, the interquartile range is closer to the lower end of the distribution rather than the middle. Importantly, while the median is in the center of the IQR for graduates, it is off-center and closer to the 25$^{th}$ percentile for undergraduates. Despite these trends, it is safe to assume that these data are close enough to normal, since they aren't *drastically* different from normal, and therefore safe to proceed with the statistical test.</span> <br>
+  + <span style="color:red">We can see from the boxplot that for both group distributions of the outcome variable (beers), the data are somewhat normally distributed. For both grads and undergrads, the interquartile range is closer to the lower end of the distribution rather than the middle. Importantly, while the median is in the center of the IQR for graduates, it is off-center and closer to the 25$^{th}$ percentile for undergraduates. Despite these trends, it is safe to assume that these data are close enough to normal, since they aren't *drastically* different from normal, and therefore safe to proceed with the statistical test.</span> <br>
   
 #
 
@@ -175,7 +175,7 @@ We assess normality an break this plot out by a grouping variable.
 xqqmath(~ beers | factor(level), data = data, fitline = TRUE, main = "Normal Q-Q Plot of 'Beers' by 'Student Type'", xlab = "Expected Normal")
 ```
 
-  + <span style="color:red">We can see from the Q-Q plot that for both group distributions of the outcome variable (beers), the data are somewhat normal, since there is no discernible pattern across the line (e.g. no strong curvilinear trend around normality line) for the *number of beers* variable for either group/level (*student type*) It is therefore safe to proceed with the statistical test.</span> 
+  + <span style="color:red">We can see from the Q-Q plot that for both group distributions of the outcome variable (beers), the data are somewhat normal, since there is no discernible pattern across the line (e.g. no strong curvilinear trend around normality line) for the *number of beers* variable for either group/level (*student type*). It is therefore safe to proceed with the statistical test.</span> 
 
   + <span style="color:red">Based on the the three visual depictions above, the data seem normally-distributed. `Therefore, we meet the assumption of normality`.</span> 
 

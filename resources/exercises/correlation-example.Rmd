@@ -104,7 +104,6 @@ data1 <- mtcars
 
 ##### 1. Linearity
 * Variables move together in a linear fashion.
-  + Visual inspection of **scatterplot** to see if relationship is linear (straight-line)
 
 ```{r}
 plot(data$esteem, data$jealousy) #(x,y)
@@ -121,17 +120,18 @@ plot(data$esteem, data$jealousy,
 abline(lm(data$jealousy~data$esteem), col="Blue") # regression line (y~x))
 ```
 
+  + <span style="color:red">Visual inspection of **scatterplot** to see if relationship is linear (straight-line). `Therefore, we meet the assumption of linearity`.</span> 
 
 ##### 2. Normality 
 
 * Distributions must be relatively normal.
   + Visual inspection of...
-    + scatterplot
+    + Scatterplot (above)
     + Histograms for each variable
-    + Normality (Q-Q) plot for each variable
     + Box-and-Whiskers plot for each variable
+    + Normality (Q-Q) plot for each variable
 
-Histogram
+##### 2a. Histogram
 
 ```{r}
 histogram(~ jealousy, data = data, main = "Histogram of 'Jealousy Score'", 
@@ -157,17 +157,9 @@ histogram(~ esteem, data = data, main = "Histogram of 'Self-Esteem Score'",
           }) 
 ```
 
-Normality (Q-Q) Plots
+  + <span style="color:red">We can see from the histogram that for both variables, the data are moderately negatively skewed. It is safe to assume, however, that these data are close enough to normal to proceed with the statistical test.</span> 
 
-```{r}
-xqqmath(~ jealousy, data=data, fitline = TRUE, main = "Normal Q-Q Plot of 'Jealousy Score'", xlab = "Expected Normal")
-```
-
-```{r}
-xqqmath(~ esteem, data=data, fitline = TRUE, main = "Normal Q-Q Plot of 'Self-Esteem Score'", xlab = "Expected Normal")
-```
-
-Box-and-Whisker Plots
+##### 2b. Box-and-Whisker Plots
 
 ```{r}
 bwplot(~ jealousy, data = data, pch="|", main = "Bar-and-Whisker Plot of 'Jealousy Score'")
@@ -177,9 +169,25 @@ bwplot(~ jealousy, data = data, pch="|", main = "Bar-and-Whisker Plot of 'Jealou
 bwplot(~ esteem, data = data, pch="|", main = "Bar-and-Whisker Plot of 'Self-Esteem Score'")
 ```
 
+  + <span style="color:red">We can see from the boxplot that for both variables, the data are somewhat normally distributed. Although, for the jealousy variable, the median is closer to the upper end (75$^{th}$ percentile) of the interquartile range than the middle. Despite this trend, it is safe to assume that these data are close enough to normal, since they aren't *drastically* different from normal, and therefore safe to proceed with the statistical test.</span>
+  
+##### 2c. Normality (Q-Q) Plots
+
+```{r}
+xqqmath(~ jealousy, data=data, fitline = TRUE, main = "Normal Q-Q Plot of 'Jealousy Score'", xlab = "Expected Normal")
+```
+
+```{r}
+xqqmath(~ esteem, data=data, fitline = TRUE, main = "Normal Q-Q Plot of 'Self-Esteem Score'", xlab = "Expected Normal")
+```
+
+  + <span style="color:red">We can see from the Q-Q plot that for both variable, the data are somewhat normal, since there is no discernible pattern across the line (e.g. no strong curvilinear trend around normality line). It is therefore safe to proceed with the statistical test.</span> 
+
+  + <span style="color:red">Based on the the three visual depictions above, the data seem normally-distributed. `Therefore, we meet the assumption of normality`.</span> 
+
+
 ##### 3. Absence of Range Restrictions
-* Values on variables cannot be restricted to small range
-  + Examine range for variables
+* Values on variables cannot be restricted to small range. Examine range for variables
   
 ```{r}
 describe(data$jealousy)
@@ -189,11 +197,13 @@ describe(data$jealousy)
 describe(data$esteem)
 ```
 
-##### 4. Absence of Heterogeneous Subsamples
-* Not having groups that have extremely different values (e.g. for which a t-test/ANOVA might appropriately identify)
-  + Examine various groups in the sample
+  + <span style="color:red">Here, it doesn't seem as though there are restictions on the possible ranges of self esteem or jealousy. `Therefore, we meet the assumption of absence of range restrictions`.</span> 
 
-Here. we don't different samples, since there is no identifying information for the cases.
+##### 4. Absence of Heterogeneous Subsamples
+* Not having groups that have extremely different values (e.g. for which a t-test/ANOVA might appropriately identify). Examine various groups in the sample
+
+  + <span style="color:red">Here. we don't different samples, since there is no identifying information for the cases. `Therefore, we meet the assumption of absence of heterogeneous subsamples`.</span> 
+
 
 #
 ### The Correlation Test Calculation
@@ -232,7 +242,7 @@ To interpret the findings, we report the following information:
 
 “Using the Pearson's correlation test ($r$), I reject/fail to reject the null hypothesis that there is no association between variable one and variable 2, in the population, $r(?) = ?, p ? .05$” 
 
-“Using the Pearson's correlation test ($r$), I reject the null hypothesis that there is no association between the weight of a car and its fuel economy in terms of miles per gallon, in the population, $r = -.8676594, p \lt .05$. In particular, we have a *strong* *negative* relationship between car weight and car mpg, such that, as the weight of the car increases, the miles-per-gallon decreases.” 
+  + <span style="color:red">“Using the Pearson's correlation test ($r$), I reject the null hypothesis that there is no association between the weight of a car and its fuel economy in terms of miles per gallon, in the population, $r = -.8676594, p \lt .05$. In particular, we have a *strong* *negative* relationship between car weight and car mpg, such that, as the weight of the car increases, the miles-per-gallon decreases.”</span>
 
 
 
