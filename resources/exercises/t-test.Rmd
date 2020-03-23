@@ -11,7 +11,7 @@ output:
 
 * [**Intro to R**](Intro-and-Univariate-Statistics.html)
 * [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
-* [**Analysis of Variance (ANOVA)**](anova.html) [[*n/a*]](anova-example.html)
+* [**Analysis of Variance (ANOVA)**](anova.html) [[*ANOVA example*]](anova-example.html)
 * [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
 * [**Correlation**](correlation.html) [[*Correlation example*]](correlation-example.html)
 
@@ -29,7 +29,7 @@ options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
 # 
 
 
-```{r, results="hide", warning=FALSE, message=FALSE, echo=FALSE}
+```{r, results="hide", warning=FALSE, message=FALSE}
 library(MASS)
 library(psych)
 library(lattice)
@@ -47,7 +47,7 @@ The assumptions for a t-test are...
 * Homogeneity of Variance
 * Normality
 
-```{r, echo=FALSE}
+```{r}
 data1 <- mtcars
 ```
 
