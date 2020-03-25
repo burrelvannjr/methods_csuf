@@ -44,7 +44,7 @@ library(mosaic)
 
 #
 
-#### The Data
+#### Reading in the Data
 
 ```{r, out.width = "500px", echo=FALSE}
 knitr::include_graphics("blm.png")

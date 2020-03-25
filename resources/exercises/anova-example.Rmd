@@ -16,9 +16,16 @@ output:
 * [**Correlation**](correlation.html) [[*Correlation example*]](correlation-example.html)
 
 
-### What is the Analysis of Variance (ANOVA)?
+### Is there a mean difference in monthly income across different racial groups?
 
-The ANOVA test examines the differences in means between **three or more** groups, in effort to see if the differences reflect true differences that we could expect to find in the population. The resulting test calculates an F value.  
+
+#### The Analysis of Variance (ANOVA)
+
+The ANOVA is a bivariate (two variable) test that examines the differences in means between **three or more** groups, in effort to see if the differences reflect true differences that we could expect to find in the population. The resulting test calculates an F value.  
+
+For this example, the ANOVA works because we have have four groups (black, white, latinx, and other), and we're examining each group's mean monthly income to see if there is a true difference in income amongst racial groups in the population. 
+
+
 
 
 
@@ -42,6 +49,43 @@ library(stats)
 
 #
 
+
+#### Reading in the Data
+
+```{r, out.width = "200px", echo=FALSE}
+knitr::include_graphics("anova.png")
+```
+
+In the table (above), we have a total of 20 people, randomly-sampled. We see that we have a total of 5 people within each racial category (black, white, latinx, and other), and each individual has a monthly income value. We can use these data to create a data set, using a combination of the concatenate, <span style="color:blue">`c()`</span>, data frame <span style="color:blue">`data.frame`</span>, and the repeat <span style="color:blue">`rep()`</span> functions. 
+
+The repeat function comes in handy when you have to type out the same values over and over again. This function has two arguments: 1) the thing you want to repeat, and 2) the number of times you want to repeat it. 
+
+Using this logic, we can apply the repeat function to create each variable, concatenating across the various categories of each variable, and combine these variables into a data frame... as such... 
+
+```{r}
+race <- c(
+  rep("black",5),
+  rep("white",5),
+  rep("latinx",5),
+  rep("other",5))
+
+inc <- c(3670, 3132, 3798, 3929, 3203, 6628, 4702, 4264, 4063, 4847, 2239, 3143, 4580, 3158, 3471, 3131, 4462, 3901, 3410, 4927)
+
+```
+
+Next, we merge the variables into one data frame, using the following:
+
+```{r}
+data <- data.frame(race,inc)
+```
+
+Now we can call the data... 
+
+```{r}
+data
+```
+
+
 #### Assumptions and Diagnostics for the ANOVA
 
 The assumptions for an ANOVA are...
@@ -51,48 +95,34 @@ The assumptions for an ANOVA are...
 * Homogeneity of Variance
 * Normality
 
-```{r}
-data1 <- mtcars
-```
-
 
 ##### 1. Independence of Observations (Examine Data Collection Strategy)
-* Groups are not related or dependent upon each other. Case can’t be in more than one group. No ties between observations.
-
-Examine data collection strategy to see if there are linkages between observations. 
+* Groups are not related or dependent upon each other. Cases can’t be in more than one group. No ties between observations. Examine data collection strategy to see if there are linkages between observations. 
+  + <span style="color:red">These data were randomly sampled. `Therefore, we meet the assumption of independence of observations`.</span> 
 
 ##### 2. Equal Sample Sizes (Examine N for each group)
-* The number of cases in each group should be relatively similar. (If not, use pooled variance/unequal variances asssume t-test formula)
+* The number of cases in each group should be relatively similar. 
+  + <span style="color:red">The sample size for each group is exactly the same for all groups. `Therefore, we have met the assumtption for equal sample sizes`.</span> 
 
 ##### 3. Homogeneity of Variance (Examine SD^2^ for each group)
-* Both groups have approximately equal variances (SD^2^). The distributions (or spread) for the groups are approximately equal. Keppel & Zedeck (1989) suggest that variance comparison should not exceed 10:1 ratio (*or... alternatively, the SDs, when compared, should not exceed around a 3:1 ratio*). 
-
-For both of the above assumptions, we can examine the univariate data table, broken out by group:
+* Both groups have approximately equal variances (SD^2^). The distributions (or spread) for the groups are approximately equal. Keppel & Zedeck (1989) suggest that variance comparison should not exceed 10:1 ratio (*or... alternatively, the SDs, when compared, should not exceed around a 3:1 ratio*). For both of the above assumptions, we can examine the univariate data table, broken out by group:
 
 ```{r}
-describeBy(data1$mpg, data1$cyl)
+describeBy(data$inc, data$race)
 ```
 
+  + <span style="color:red">We can see from the output that, comparing the SD for both groups, there is not a ratio larger than 3:1. For these data, the largest descrepancy between SDs for each group is between black individuals (SD = 358.68) and white individuals (SD = 1016.5), which is less than the 3:1 ratio suggested. `Therefore, we have met the assumption for homogeneity of variance`.</span> 
 
 ##### 4. Normality (Examine Plots: Histogram, Q-Q Normality Plots, Box-and-Whiskers Plots)
-* Distribution must be relatively normal. (If violated, use “unequal variances assumed” formula, otherwise, use “equal variances assumed”)
-
-
+* Distribution must be relatively normal. 
 
 ##### 4a. Histogram
 
-Plot the histogram for mpg (Y variable) broken out by number of cylinders in a car (levels of the X variable)...  
+Plot the histogram for *Monthly Income* (Y variable) broken out by *Racial Category* (levels of the X variable), overlaying a normal curve... 
+
 
 ```{r}
-histogram(~ mpg | factor(cyl), data = data1, type = "count", main = "Histogram of 'Miles per Gallon' by 'Number of Cylinders'")
-```
-
-#
-
-...next, overlay a normal curve...
-
-```{r}
-histogram(~ mpg | factor(cyl), data = data1, main = "Histogram of 'Miles per Gallon' by 'Number of Cylinders'", 
+histogram(~ inc | factor(race), data = data, main = "Histogram of 'Monthly Income' by 'Race'", 
           type = "density", 
           panel=function(x, ...) {
             panel.histogram(x, ...)
@@ -103,6 +133,7 @@ histogram(~ mpg | factor(cyl), data = data1, main = "Histogram of 'Miles per Gal
           }) 
 ```
 
+  + <span style="color:red">We can see from the histogram that for both group distributions of the outcome variable (beers), the data are moderately positively skewed (with the exeception of the distribution of scores for black individuals). Although these are moderately skewed, it is safe to assume that these data are close enough to normal to proceed with the statistical test.</span> 
 
 ##### 4b. Boxplots (Box-and-Whisker Plots)
 
@@ -123,12 +154,16 @@ To tell if a variable is normally-distrubted using the box-and-whisker plot, gen
 #
 
 
-To plot a boxplot, broken out by *Number of Cylinders in a Car*, we can do the following...
+To plot a boxplot of *Monthly Income*, broken out by *Race*, we can do the following...
 
 
 ```{r}
-bwplot(~mpg | factor(cyl), data = data1, pch="|", main = "Bar-and-Whisker Plot of 'Miles per Gallon' by 'Number of Cylinders'")
+bwplot(~ inc | factor(race), data = data, pch="|", main = "Bar-and-Whisker Plot of 'Monthly Income' by 'Race'")
 ```
+
+  + <span style="color:red">We can see from the boxplots that for the black and other groups are somewhat normally distributed. The data for latinx and white individuals, however, possesses some outliers, and the median falls near or on the edge of the interquartile range. In addition, the minimum and maximum scores are missing for latinx individuals while the maximum is missing for white individuals (rather, those scores are read as extremes or outliers). These plots may give us some pause in proceeding. In many cases, finding distributions like this would warrant further data collection (e.g. there may be too few cases in this sample, which is why many are perceived as outliers). However, for this example, the data seem *normal enough*. It is safe to assume that these data are close enough to normal, since they aren't *drastically* different from normal, and therefore safe to proceed with the statistical test.</span> <br>
+  
+#
 
 
 ##### 4c. Normal Q-Q (Quantile-Quantile) Plots
@@ -138,9 +173,12 @@ The quantile-quantile plot is a visual tool to help us figure out if the empiric
 We assess normality an break this plot out by a grouping variable. 
 
 ```{r}
-xqqmath(~mpg | factor(cyl), data=data1, fitline = TRUE, main = "Normal Q-Q Plot of 'Miles per Gallon' by 'Number of Cylinders'", xlab = "Expected Normal")
+xqqmath(~ inc | factor(race), data = data, fitline = TRUE, main = "Normal Q-Q Plot of 'Monthly Income' by 'Race'", xlab = "Expected Normal")
 ```
 
+  + <span style="color:red">We can see from the Q-Q plot that for both group distributions of the outcome variable (monthly income), the data are somewhat normal, since there is no discernible pattern across the line (e.g. no strong curvilinear trend around normality line) for the *income* variable for any group/level (*race*). It is therefore safe to proceed with the statistical test.</span> 
+
+  + <span style="color:red">Based on the the three visual depictions above, the data seem normally-distributed. `Therefore, we meet the assumption of normality`.</span> 
 
 ### The ANOVA (F-Test)
 
@@ -169,10 +207,10 @@ For the ANOVA, within the <span style="color:blue">`aov`</span> function, the de
 
 
 ```{r}
-summary(aov(data1$mpg ~ data1$cyl))
+summary(aov(data$inc ~ data$race))
 ```
 
-In the output above, we see the F-obtained value (79.56), the degrees of freedom between and within (1,30), and the p-value (6.11e-10, or .000000000611, which is much less than our set alpha level of .05).
+In the output above, we see the F-obtained value (4.043), the degrees of freedom between and within (3,16), and the p-value (.0257, which is less than our set alpha level of .05).
 
 To interpret the findings, we report the following information:
 
@@ -184,7 +222,7 @@ To interpret the findings, we report the following information:
 
 “Using a one-way ANOVA, I reject/fail to reject the null hypothesis that there is no mean difference between groups, in the population, $F(?) = ?, p ? .05$” 
 
-“Using one-way ANOVA, I reject the null hypothesis that there is no mean difference between the miles per gallon in cars with different cylinders, in the population, $F(1,30) = 79.56, p \leq .05$” 
+“Using one-way ANOVA, I reject the null hypothesis that there is no mean difference between the monthly income of differnt racial categories, in the population, $F(3,16) = 4.043, p \leq .05$” 
 
 
 ### Which means differ?
@@ -192,20 +230,22 @@ To interpret the findings, we report the following information:
 We can simply plot means, using the <span style="color:blue">`plotmeans`</span> function...
 
 ```{r}
-plotmeans(mpg ~ cyl, data = data1, 
-          xlab = "Cylinder", ylab = "Miles Per Gallon",
+plotmeans(inc ~ factor(race), data = data, 
+          xlab = "Race", ylab = "Monthly Income",
           main="Mean Plot with 95% CI") 
 ```
 
-Here, we can see that it looks like 4-cylinder cars have extremely different (higher) mean mpgs than eith 6-cylinder or 8-cylinder cars.
+Here, we can see that it looks like whites have higher monthly incomes than others. Yet to see, statistically, if group means differ, we have to run post-hoc tests that compare all possible pairs of means to determine which differences are statistically significant.
 
-And finally, we can see where the *significantly different* mean comparisons are, with the Tukey's HSD test... using the <span style="color:blue">`TukeyHSD`</span> function...(here I had to call the second variable a factor because it is read by R as a number)
+We can see where the *significantly different* mean comparisons are, with the Tukey's HSD test... using the <span style="color:blue">`TukeyHSD`</span> function...(here I had to call the second variable a factor because it is read by R as a number)
 
 ```{r}
-TukeyHSD(aov(data1$mpg ~ factor(data1$cyl)))
+TukeyHSD(aov(data$inc ~ factor(data$race)))
 ```
 
-Here, we see that 4-cylinder cars are, actually, significantly different than 6-cylinder or 8-cylinder cars, and that 6-cylinder cars are, themselves, significantly different from 8-cylinder cars.
+
+  + <span style="color:red">Here, we see that the only significant difference lies between white's mean monthly income and latinx' mean monthly income.</span>  
+
 
 
 <br><br><br>
