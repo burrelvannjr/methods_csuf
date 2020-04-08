@@ -479,7 +479,7 @@ inc &lt;- c(3670, 3132, 3798, 3929, 3203, 6628, 4702, 4264, 4063, 4847, 2239, 31
 <div id="homogeneity-of-variance-examine-sd2-for-each-group" class="section level5">
 <h5>3. Homogeneity of Variance (Examine SD<sup>2</sup> for each group)</h5>
 <ul>
-<li>Both groups have approximately equal variances (SD<sup>2</sup>). The distributions (or spread) for the groups are approximately equal. Keppel &amp; Zedeck (1989) suggest that variance comparison should not exceed 10:1 ratio (<em>or… alternatively, the SDs, when compared, should not exceed around a 3:1 ratio</em>). For both of the above assumptions, we can examine the univariate data table, broken out by group:</li>
+<li>All groups have approximately equal variances (SD<sup>2</sup>). The distributions (or spread) for the groups are approximately equal. Keppel &amp; Zedeck (1989) suggest that variance comparison should not exceed 10:1 ratio (<em>or… alternatively, the SDs, when compared, should not exceed around a 3:1 ratio</em>). For both of the above assumptions, we can examine the univariate data table, broken out by group:</li>
 </ul>
 <pre class="r"><code>describeBy(data$inc, data$race)</code></pre>
 <pre><code>## 
@@ -508,7 +508,7 @@ inc &lt;- c(3670, 3132, 3798, 3929, 3203, 6628, 4702, 4264, 4063, 4847, 2239, 31
 ##    kurtosis     se
 ## X1    -1.21 454.59</code></pre>
 <ul>
-<li><span style="color:red">We can see from the output that, comparing the SD for both groups, there is not a ratio larger than 3:1. For these data, the largest descrepancy between SDs for each group is between black individuals (SD = 358.68) and white individuals (SD = 1016.5), which is less than the 3:1 ratio suggested. <code>Therefore, we have met the assumption for homogeneity of variance</code>.</span></li>
+<li><span style="color:red">We can see from the output that, comparing the SD for all groups, there is not a ratio larger than 3:1. For these data, the largest descrepancy between SDs for each group is between black individuals (SD = 358.68) and white individuals (SD = 1016.5), which is less than the 3:1 ratio suggested. <code>Therefore, we have met the assumption for homogeneity of variance</code>.</span></li>
 </ul>
 </div>
 <div id="normality-examine-plots-histogram-q-q-normality-plots-box-and-whiskers-plots" class="section level5">

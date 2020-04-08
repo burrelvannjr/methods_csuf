@@ -105,13 +105,13 @@ The assumptions for an ANOVA are...
   + <span style="color:red">The sample size for each group is exactly the same for all groups. `Therefore, we have met the assumtption for equal sample sizes`.</span> 
 
 ##### 3. Homogeneity of Variance (Examine SD^2^ for each group)
-* Both groups have approximately equal variances (SD^2^). The distributions (or spread) for the groups are approximately equal. Keppel & Zedeck (1989) suggest that variance comparison should not exceed 10:1 ratio (*or... alternatively, the SDs, when compared, should not exceed around a 3:1 ratio*). For both of the above assumptions, we can examine the univariate data table, broken out by group:
+* All groups have approximately equal variances (SD^2^). The distributions (or spread) for the groups are approximately equal. Keppel & Zedeck (1989) suggest that variance comparison should not exceed 10:1 ratio (*or... alternatively, the SDs, when compared, should not exceed around a 3:1 ratio*). For both of the above assumptions, we can examine the univariate data table, broken out by group:
 
 ```{r}
 describeBy(data$inc, data$race)
 ```
 
-  + <span style="color:red">We can see from the output that, comparing the SD for both groups, there is not a ratio larger than 3:1. For these data, the largest descrepancy between SDs for each group is between black individuals (SD = 358.68) and white individuals (SD = 1016.5), which is less than the 3:1 ratio suggested. `Therefore, we have met the assumption for homogeneity of variance`.</span> 
+  + <span style="color:red">We can see from the output that, comparing the SD for all groups, there is not a ratio larger than 3:1. For these data, the largest descrepancy between SDs for each group is between black individuals (SD = 358.68) and white individuals (SD = 1016.5), which is less than the 3:1 ratio suggested. `Therefore, we have met the assumption for homogeneity of variance`.</span> 
 
 ##### 4. Normality (Examine Plots: Histogram, Q-Q Normality Plots, Box-and-Whiskers Plots)
 * Distribution must be relatively normal. 
