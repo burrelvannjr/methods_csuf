@@ -14,6 +14,7 @@ output:
 * [**Analysis of Variance (ANOVA)**](anova.html) [[*ANOVA example*]](anova-example.html)
 * [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
 * [**Correlation**](correlation.html) [[*Correlation example*]](correlation-example.html)
+* [**Regression**](regression.html) [[*Regression example*]](regression-example.html)
 
 
 ### What is the correlation?
@@ -154,7 +155,7 @@ describe(data1$wt)
 #
 ### The Correlation Test Calculation
 
-The calculation for the Chi Square is:
+The calculation for the correlation is:
 
  $r = \frac{\sum (X - \bar{X})(Y - \bar{Y})}{\sqrt{\sum (X - \bar{X})^2 \sum(Y - \bar{Y})^2}}$
  

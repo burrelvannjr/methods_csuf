@@ -1,0 +1,159 @@
+---
+title: "OLS Regression"
+#author: "Burrel Vann Jr"
+output: 
+  html_document: 
+    css: markdown3.css
+---
+
+
+###### Navigation
+
+* [**Intro to R**](Intro-and-Univariate-Statistics.html)
+* [**t-Test**](t-test.html) [[*t-Test example*]](t-test-example.html)
+* [**Analysis of Variance (ANOVA)**](anova.html) [[*ANOVA example*]](anova-example.html)
+* [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
+* [**Correlation**](correlation.html) [[*Correlation example*]](correlation-example.html)
+* [**Regression**](regression.html) [[*Regression example*]](regression-example.html)
+
+
+### What is the Regression?
+
+The OLS regression examines the predictive relationship between some independent variable, and an interval-ratio dependent variable. The test tells us about the effect (slope) of any independent (x) variable on an interval-ratio dependent (Y) variable. In particular, the regression equation looks at how values of an x variable "predict" a specific Y value.
+
+
+Here, we'll look at a multiple (multivariate OLS) regression for the mtcars data, with miles per gallon (mpg) as the DV, car weigh (wt) as IV1 and whether or not the car has an automatic transmission (at) as IV2.
+
+
+```{r, echo=F}
+options(repos=c(CRAN="http://cran.stat.ucla.edu/"))
+```
+
+# 
+
+#
+
+#### Assumptions and Diagnostics for Correlation
+
+The assumptions for the Correlation are...
+
+* Adequate Sample Size
+* Absence of Outliers
+* Absence of Multicollinearity and Singluarity
+* Linearity, Normality, and Homoscedasticity (Homogeneity of Variance)
+
+In addition, the previously-discussed assumptions for other tests (independence of observations) is implied, since all of these bivariate tests require random samples.
+
+```{r, results="hide", warning=FALSE, message=FALSE}
+library(MASS)
+library(psych)
+library(lattice)
+library(mosaic)
+```
+
+
+```{r}
+data1 <- mtcars
+```
+
+
+
+##### 1. Adequate Sample Size
+
+* According to Tabachnick and Fidel (1983), adequate sample size is determined by the equation $N \geq 50 + 8(m)$
+
+Where $m$ is the number of independent variables included in the regression model. 
+
+##### 2. Absence of Outliers
+
+To identify outliers, simply look at the *boxplots* to see "how outlying, these outliers are." In most cases, outliers should remain in the data. Need strong justification for removing outlying cases.
+
+```{r}
+bwplot(~mpg, data=data1, pch="|", main = "Bar-and-Whisker Plots of 'Miles per Gallon'")
+```
+
+```{r}
+bwplot(~wt, data=data1, pch="|", main = "Bar-and-Whisker Plots of 'Weight'")
+```
+
+```{r}
+bwplot(~am, data=data1, pch="|", main = "Bar-and-Whisker Plots of 'Automatic Transmission'")
+```
+
+##### 3. Multicollinearity and Singularity
+* Multicollinearity: Independent variables (more) highly correlated with one another (compared to their correlation with the DV).
+
+  + Check the correlation matrix for variables.
+
+```{r}
+cor(data1)
+```
+
+* Singularity: If independent variables included are (together) all possible subsets of measure also included in model. For example, if you have a xenophobia scale... based on 4 different questions (the sum of the scale is a "total xenophobia" scale)... and you include all 4 questions in the regression model, AND you include the total scale (the sum of the 4 questions) in the model. There will be so much overlap in the total scale, and the 4 items, that all of them would appear in the regression model with no coefficients... no $b$ values... 
+
+  + Look at the items and determine if they are subsets of other items also included. 
+
+##### 1. Linearity, Normality, and Homoskedasticity
+* Linearity: Variables move together in a linear fashion.
+* Normality: Variables are normally-distributed.
+* Homoskedasticity: Homogeneity of Variance - Variance of variables are similar (10:1, 3:1 for SDs).
+  + Visual inspection of **Residuals Plot** to see if relationship is linear, normal, and similar variances. Plot should have **points that extend beyond both sides of the 0 line** (normality), **should not have a U or inverted-U shape in the points** (linearity), and it **should not have a funnel shape**, where points are tightly clustered near the 0 line at one end of the plot, and completely dispersed along y-axis at other end of plot (homoskedasticity).
+
+```{r}
+plot(data1$wt + data1$am, resid(lm(mpg ~ wt + am, data=data1)), 
+     ylab="Residuals", xlab="Full Regression Model (mpg = wt + am)", 
+     main="Miles per Gallon")
+abline(0, 0)  
+```
+
+#
+### The Regression Calculation
+
+The calculation for the Regression is:
+
+ $\hat{Y} = b_1X_1 + b_2X_2$
+ 
+Where...
+* $\hat{Y}$ is the predicted Y value for the combination of slopes for X values
+* $b_1$ is the slope associated with $X_1$
+* $b_2$ is the slope associated with $X_2$
+* $X_1$ is a specific value for the first $X$ variable that you can plug in for a specific case
+* $X_2$ is a specific value for the second $X$ variable that you can plug in for a specific case
+
+ 
+
+
+In addition, the degrees of freedom ($df$) for the test is...<br> 
+* $df = N - 2$
+
+
+### Running the Regression
+
+
+For Regression, within the <span style="color:blue">`lm`</span> function, which stands for *linear model*, the dependent variable is listed first and the independent variable is listed second. 
+
+
+```{r, results="hide"}
+lm(mpg ~ wt + am, data=data1)
+```
+
+This may seem confusing, so it's best to wrap our <span style="color:blue">`lm`</span> function in a <span style="color:blue">`summary`</span> call... 
+
+```{r}
+summary(lm(mpg ~ wt + am, data=data1))
+```
+
+To interpret the findings, we report the following information:
+
+* The test used
+* The variables used in the full model
+* For significant variables, how a variable's slope affects the outcome
+* The amount of variance in the outcome explained by the combination of IVs.
+
+In the output above, using an OLS regression, we see the Y-intercept (or mean MPG) is an MPG value of 37.32. 
+
+In addition, we see that the b for the wt variable is significant and negatively related to MPG, such that, for every 1-unit (however it is measured) increase in weight of a car, there is a **5.353-unit decrease** in miles per gallon of a car. In addition, whether or not a car has an automatic transmission is unrelated to MPG. Finally, for this full model, which predicts miles per gallon from the weight of a car whether or not it is automatic transmission, the $R^2$ is .7528, which means that, given these data, 75% of miles per gallon of a car can be explained by the combination of a car's weight, and whether or not it is automatic 
+
+
+
+<br><br><br>

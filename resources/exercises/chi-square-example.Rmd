@@ -14,6 +14,7 @@ output:
 * [**Analysis of Variance (ANOVA)**](anova.html) [[*ANOVA example*]](anova-example.html)
 * [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
 * [**Correlation**](correlation.html) [[*Correlation example*]](correlation-example.html)
+* [**Regression**](regression.html) [[*Regression example*]](regression-example.html)
 
 
 ### Is there an association between political orientation and views of the Black Lives Matter movement? 

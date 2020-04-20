@@ -13,6 +13,7 @@ output:
 * [**Analysis of Variance (ANOVA)**](anova.html) [[*ANOVA example*]](anova-example.html)
 * [**Chi Square**](chi-square.html) [[*Chi Square example*]](chi-square-example.html)
 * [**Correlation**](correlation.html) [[*Correlation example*]](correlation-example.html)
+* [**Regression**](regression.html) [[*Regression example*]](regression-example.html)
 
 
 ### What is R?
@@ -545,5 +546,11 @@ hist(thousand)
 ```
 
 So now you know that the more cases/data points you have, the more your data will mimic the normal distribution (bell curve).
+
+
+### R for Data Science
+
+For anyone interested in learning R from the ground, up, for data science, a great resource is [R for Data Science](https://r4ds.had.co.nz/index.html)
+
 
 <br><br><br>
