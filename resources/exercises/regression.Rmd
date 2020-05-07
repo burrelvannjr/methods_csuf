@@ -100,9 +100,18 @@ cor(data1)
   + Visual inspection of **Residuals Plot** to see if relationship is linear, normal, and similar variances. Plot should have **points that extend beyond both sides of the 0 line** (normality), **should not have a U or inverted-U shape in the points** (linearity), and it **should not have a funnel shape**, where points are tightly clustered near the 0 line at one end of the plot, and completely dispersed along y-axis at other end of plot (homoskedasticity).
 
 ```{r}
-plot(data1$wt + data1$am, resid(lm(mpg ~ wt + am, data=data1)), 
-     ylab="Residuals", xlab="Full Regression Model (mpg = wt + am)", 
-     main="Miles per Gallon")
+#run the regression and save it as a 'reg' object
+reg <- lm(mpg ~ wt + am, data=data1)
+#extract predicted Y values and residuals from 'reg' model object
+data1$predicted <- predict(reg)  
+data1$residuals <- residuals(reg)
+```
+
+then plot the above data
+
+```{r}
+plot(data1$predicted, data1$residuals, 
+     xlab="Predicted Y Value", ylab="Residuals", main="Miles per Gallon")
 abline(0, 0)  
 ```
 
@@ -123,8 +132,7 @@ Where...
  
 
 
-In addition, the degrees of freedom ($df$) for the test is...<br> 
-* $df = N - 2$
+
 
 
 ### Running the Regression
